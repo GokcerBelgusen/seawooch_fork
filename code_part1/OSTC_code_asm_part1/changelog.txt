@@ -1,0 +1,608 @@
+New in 3.13:
+Stable Release
+NEW: Logbook shows markers with small orange boxes in the profile
+
+New in 3.12:
+Beta Release
+BUGFIX: Minor layout fix (Battery warning in divemode)
+CHANGE: Color-code battery % display in surface mode (Charge, Full, Normal)
+
+New in 3.11:
+BUGFIX: "First Diluent" and "SP Mode" used same EEPROM location
+
+New in 3.10:
+Stable Release
+
+New in 3.05:
+Beta Release
+NEW: Quit Simulator automatically when starting a real dive
+CHANGE: Battery percent based on ON-Time instead of battery voltage
+
+New in 3.04:
+Beta Release
+BUGFIX: Fix licence in German
+BUGFIX: Fix minor layout bugs in surface mode
+NEW: Auto Setpoint switch function (CC Modes)
+
+New in 3.03:
+Stable Release
+BUGFIX: 1st line in logbook was not displayed in rare cases (2C hardware)
+
+New in 3.02:
+Stable Release
+BUGFIX: Divetime had unwanted "." behind the minutes
+
+New in 3.01:
+Stable Release
+BUGFIX: Entry time in logbook when dive was around midnight
+BUGFIX: Show manually set O2 (Gas 6) correctly
+BUGFIX: Show dives with >999mins divetime correctly
+
+New in 3.00:
+Stable Release
+BUGFIX: Fix color codes 192-223 (Mk.2 and 2N only)
+
+New in 2.95:
+BETA Version
+BUGFIX: Surface interval was paused during simulator
+BUGFIX: False Bailout and Gas 6 flags in logbook
+BUGFIX: Color of "Menu?" in divemode
+
+New in 2.94:
+BETA Version
+BUGFIX: False bailout flag in logbook
+NEW: On-Time counter for better battery information
+NEW: Store useage timer in logbook header (Byte 54, see documentation)
+NEW: CF74: Battery Timeout [min] - Battery symbol will blink if the OSTC was
+     longer in active mode (since the last _full_ charge) then CF74.
+     Default=1800 (30hours)
+
+New in 2.93:
+BETA Version
+NEW: Show Gas change countdown if CF55>0
+CHANGE: Graphical velocity on by default (CF60=1)
+NEW: Ceiling display (GF_hi based) in divemode
+CHANGE: No turkish language support anymore
+BUGFIX: Gas volume computation when using several travel mixes
+
+New in 2.91:
+BETA Version
+New: Show bailout event in internal logbook
+
+New in 2.90:
+Stable Release
+BUGFIX: CNS calculation in decoplan should track gas (no marked changes anymore)
+
+New in 2.81:
+BUGFIX: Show bailout list if first bailout gas <> gas 1
+BUGFIX: Italian language fix (Divemode menu)
+BUGFIX: Gas change depth display in divemode menu (OSTC 2C only)
+
+New in 2.80:
+Stable Release
+
+New in 2.75:
+BETA Version - Do NOT use for diving
+BUGFIX: ppO2 display in PSCR Mode
+
+New in 2.74:
+BETA Version - Do NOT use for diving
+BUGFIX: remove ghost image (On 2C only) during first second in sleep mode
+CHANGE: Remove CF55 from decolist
+TODO: show gas change stops different from decostops
+BUGFIX: FTTS>9min in OSTC 2C hardware
+NEW: Show the bailout list in surfacemode (CC Modes)
+CHANGE: Faster button response
+
+New in 2.73:
+BETA Version - Do NOT use for diving
+BUGFIX: Show ppo2 of change depth in gas setup for OSTC 2C hardware
+
+New in 2.72:
+BETA Version - Do NOT use for diving
+CHANGE: Some minor code cleanups
+CHANGE: Spanish language updates
+
+New in 2.71:
+BETA Version - Do NOT use for diving!
+NEW: Indicate First Gas (OC) as Better Gas in Bailout list
+BUGFIX: Clear end-of-dive countdown properly when descending again
+
+New in 2.70:
+Intermediate release for OSTC 2C users (Language support)
+
+New in 2.65:
+BETA Version - Do NOT use for diving!
+CHANGE: show old decoplan after gas change until new decoplan is ready
+CHANGE: "ostc3-style" menu titles
+NEW: Vault date and time during update
+
+New in 2.63:
+BETA Version - Do NOT use for diving!
+BUGFIX: no flicker when powering on
+CHANGE: 256ms switch debounce timer
+
+New in 2.62:
+BETA Version - Do NOT use for diving!
+BUGFIX: CNS compute. NOAA tables are in ATA, not bar
+
+New in 2.61:
+BETA Version - Do NOT use for diving!
+CHANGE: Set default for CF64 (Color inactive) to 103 (light blue)
+BUGFIX: Vault low_depth too
+BUGFIX: Ascent to first stop in finer steps (Deko spikes)
+
+New in 2.60:
+BETA Version - Do NOT use for diving!
+CHANGE: Removed "Mix type" Icons and CF43
+CHANGE: Hardware4 support
+CHANGE: Use 4Bytes in EEPROM for diluents (Same as OC gases)
+NEW: Show active gas indicator below first gas in surfacemode
+UPDATE: OSTC interface description file
+NEW: Hard-coded min. Values for CF00 and CF01
+CHANGE: Set cursor to "Exit" when leaving some sub-menus
+
+New in 2.59:
+BETA Version - Do NOT use for diving!
+CHANGE: Set CF17 (ppo2_warning_low) low level to 0.16bar
+Known Issue: CFIII Menu not checked from cf_checker routine
+
+New in 2.58:
+BETA Version - Do NOT use for diving!
+NEW: Confirmation when marker is set
+BUGFIX: Decoplan update after GF change
+NEW: CF70: Safety Stop Duration [s]
+NEW: CF71: Safety Stop Start Depth [m]
+NEW: CF72: Safety Stop End Depth [m]
+NEW: CF73: Safety Stop Reset Depth [m]
+
+New in 2.57:
+BETA Version - Do NOT use for diving!
+CHANGE: GF_hi default now 85% (CF33)
+NEW: aGF: Alternative GF (CF67 and CF68). Can be switched underwater if CF69=1
+NEW: CF67: aGF_lo [%]
+NEW: CF68: aGF_hi [%]
+NEW: CF69: Allow GF change (underwater)
+CHANGE: Deco model default now is L16-GF OC (OC, GF-Deco)
+
+New in 2.56:
+BETA Version - Do NOT use for diving!
+BUGFIX: Gas volumes when many tanks and stops
+BUGFIX: show first diluent in simulator result screen (Instead of first gas)
+
+New in 2.55:
+BETA Version - Do NOT use for diving!
+NEW: Allow any Diluent to be "First Gas" in CCR mode
+
+New in 2.54:
+BETA Version - Do NOT use for diving!
+BUGFIX: Allow Diluents with more then 50% He
+CHANGE: "Max." Depth text position
+
+New in 2.53:
+BETA Version - Do NOT use for diving!
+NEW: 5 Gases extra for CC
+TODO: Text 61,229,110,111,229,230,231,232 TXT_DIL_C, TXT_DIL5 update
+NEW: Divisor Decoplan (CF25) stores entire decoplan in logbook
+NEW: CF29 stored in divelog header (Byte 52)
+BUGFIX: Gas Setup when using "ERR" Gases (e.g. NX17)
+
+New in 2.51:
+BETA Version - Do NOT use for diving!
+NEW: Saves last selected custom view for surface mode and dive mode
+NEW: Gaslist highlights "better gas" in divemode
+NEW: Cursor is in front of the "better gas" automatically
+
+New in 2.50 Stable:
+INFO: This update will reset all Custom Functions and gases to defaults
+BUGFIX: Divetime display in Gauge mode
+
+New in 2.29:
+INFO: This update will reset CFIII menu to defaults
+BETA Version - Do NOT use for diving!
+NEW CF66: Show GF in NDL (If GF > CF08)
+NEW: Show total dives in Battery Information menu
+CHANGE: CF01 default to 75cm
+
+New in 2.28:
+BETA Version - Do NOT use for diving!
+BUGFIX: Blink better gas in bailout case (if CF42=1)
+CHANGE: Surface screen layout change
+BUGFIX: Use CF01 for end-of-dive detection
+CHANGE: CF01 default to 50cm
+
+New in 2.27:
+BETA Version - Do NOT use for diving!
+BUGFIX: Reset CFIII on update
+
+New in 2.26:
+BETA Version - Do NOT use for diving!
+CHANGE: Safety stop behaviour
+BUGFIX: Reset CFIII Menu
+
+New in 2.25:
+BETA Version - Do NOT use for diving!
+NEW: CF65: Show a safety stop for no-deco dives
+
+New in 2.24:
+BETA Version - Do NOT use for diving!
+BUGFIX: CNS for pSCR-GF
+
+New in 2.23:
+BETA Version - Do NOT use for diving!
+NEW: CF64: Configures color for inactive gases
+NEW: Deco mode "pSCR-GF": Computes deco and CNS based on pSCR parameters (CF62/63)
+
+New in 2.22:
+BETA Version - Do NOT use for diving!
+NEW: Custom Functions III menu (CF64-CF95)
+BUGFIX: Missed deco stops issue
+BUGFIX: Timeout for 2nd page of Gas Setup
+BUGFIX: GasVolume checks for a gas-switch before the first stop
+NEW: Battery statistics reset when battery is fully charged
+
+New in 2.21:
+BUGFIX: GF warning in logbook memory
+NEW: Compute ppO2 for pSCR diving
+NEW: CF61: Show pSCR ppO2 in customview
+NEW: CF62: pSCR O2 Drop in percent
+NEW: CF63: pSCR counterlung ratio 1/x
+BUGFIX: CF55 behaviour
+
+New in 2.20:
+Stable Release
+
+New in 2.10 beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: Spurious logbook read issue
+BUGFIX: Improved stability for bootloader v2
+
+New in 2.09 beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: small layout fixes
+BUGFIX: Show NDL after deco is done
+
+New in 2.08 beta:
+BETA Version - Do NOT use for diving!
+NEW: Show change gas depth below gaslist (in divemode)
+
+New in 2.07 beta:
+BETA Version - Do NOT use for diving!
+NEW: Added GF surface display (when > CF08).
+BUGFIX: spurious random NDL>0 during deco dive
+CHANGE: Moved "Bailout" to top of SetPoint list
+CHANGE: Speed optimizations in deco code
+
+New in 2.06 beta:
+BETA Version - Do NOT use for diving!
+CHANGE: NDL routine faster/more precise simulation
+BUGFIX: CCR air mode: should not blink for my bailout (bug #66)
+BUGFIX: Spurious stop order when simulating deadly fast ascent
+BUGFIX: N2_ratio/He_ratio[] not inited at boot time.
+CHANGE: Turkish text for velocity.
+
+New in 2.05 beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: German text layout in Divemode
+NEW: Always show numeric velocity...
+NEW: DISPLAY Brightness setting
+
+New in 2.04 beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: Missing surface pressure for CNS in decoplan.
+BUGFIX: Surface desat factor missing for Interval planning in GF mode.
+CHANGE: Velocity display updated every second
+NEW: CF60: Show graphical velocity indicator (Ascend only)
+NEW: Added turkish language
+
+New in 2.03 beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: Logbook write
+
+New in 2.02 beta:
+BETA Version - Do NOT use for diving!
+NEW: Cave divers consomation display and alarm (CF59).
+CHANGE: SAC (CF56/CF57) in range 5..50 l/min (no more decimal).
+NEW: 32MHz mode: computes twice faster.
+BUGFIX: Hang when deco table is full (more than 32 stops).
+
+New in 2.01 beta:
+BUGFIX: No decodata in logbook for apnea dives
+
+New in 2.00 Stable:
+Stable release
+BUGFIX: Fixing 32kB boundary read for logbook
+
+New in 1.98 beta:
+BUGFIX bad first Tp� and ceiling values in logbook curves.
+
+New in 1.97 beta:
+NEW: Logbook displays ceilings and temperature curve.
+BUGFIX: Decoplanner accumulates CNS during ascent.
+NEW: Decoplanner warns in red if CNS is too high.
+NEW: Decoplanner OC volumes in liters (or bars), up to 65000.
+NEW: Released also in Russian language
+BUGFIX: SetPoint store in Profile
+
+New in 1.95 beta:
+CHANGE: 0.98bar equal 10m depths with salinity set to 1.00kg/l
+
+New in 1.94 beta:
+Pre-Release for 2.0 Stable
+BUGFIX: CNS was not cleared with a "Reset Deco"
+CHANGE: Max. depth for simulator now 120m
+BUGFIX: Ascend threshold in high altitude mode
+
+New in 1.93 beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: blinking fixed setpoint if actual setpoint lower then physically possible
+BUGFIX: SetPoint recording for logbook
+BUGFIX: Divetime seconds synced with stopwatch start
+NEW: End-of-Dive countdown displayed after surfacing
+
+New in 1.92 beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: warning color for ppO2>3,3bar and ppO2<6,55bar fixed
+BUGFIX: Start SetPoint is attached to first depth sample in logbook profile
+BUGFIX: Simulator menu collided with descent counter in Apnea mode
+BUGFIX: Display hypoxic air in divemode (bug #41)
+CHANGE: Gas change indication is displayed in yellow
+
+New in 1.91 beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: Ignore depths>130m in PC simulation
+BUGFIX: Avoid spurious CF55 stops with 3 gas or more
+BUGFIX: Average depth in Logbook (For dives made with >=1.91)
+BUGFIX: Logbook time scale (squares are 10min * 10m)
+BUGFIX: B�hlmann half-times rounded to the minute
+BUGFIX: Protect again rare race contition on pressure/temperature
+BUGFIX: Time is now accurate
+CHANGE: CF02 now allows delay of more then 240seconds
+CHANGE: First gas do not reset change depth
+CHANGE: Logbook format 21: store & shows dive model (sat/desat or GF_low/high factors),
+        CNS profile, GF profile.
+        WARNING: the upgrade is not reversible without loosing all your profiles.
+NEW: "Quit Sim" in divemode simulator menu for exiting the simulation
+NEW: Allow -2:00 to +2:00 adjustement per day (CF48).
+NEW: 1/10/100 steps in CF menu
+NEW: 64kByte Logbook (Doubled capacity compared to 1.90)
+NEW: Additional dive interval for simulator and decoplaning
+NEW: Negative temperatures in logbook and battery information menu
+NEW: Screen dump support
+
+New in 1.90 Stable:
+Stable release
+
+New in 1.89 beta:
+BETA Version - Do NOT use for diving!
+NEW: ppO2 in case of a loop flush can be displayed in CCR mode
+NEW: Fixed Setpoint with color warnings
+BUGFIX: Fixed Setpoint behavior >2,55bar with CF38=ON
+NEW: Future TTS also available in no-deco phase of dive
+
+New in 1.88 beta:
+BETA Version - Do NOT use for diving!
+CHANGE: CF warning window moved to upper right corner
+BUGFIX: Gas4 fixed
+NEW: Future TTS (@xx Variant) in Custom View (Divemode)
+NEW: CF58 (0-10 min): Computes Future TTS in xx min
+
+New in 1.87 beta:
+BETA Version - Do NOT use for diving!
+CHANGE: Runtime simulator faster
+BUGFIX: "Active?" list in Divemode
+NEW: Display CNS in decoplan
+NEW: Colored stops in decoplan (CF55 > 0)
+NEW: 115kbaud/s bootloader
+NEW: Colored battery sign when charging (yellow) or charged (green)
+CHANGE: Battery symbol filled
+BUGFIX: Apply salinity for ceiling warning
+CHANGE: Gas Setup page 2 reworked (MOD depth default)
+BUGFIX: x-scale in Logbook fixed
+CHANGE: Some typos in English text
+NEW: Display ppO2[Diluent] in CCR modes
+NEW: Display EAD/END in OCR and CCR modes
+
+New in 1.86 beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: Average depth in Logbook fixed
+BUGFIX: Stand-alone simulator
+
+New in 1.85 beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: zero gas rate (bug bb28)
+BUGFIX: Safer rounding (bug bb29)
+CHANGE: making the seconds display in divemode smoother
+
+New in 1.84 beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: NoFly time should not be reseted after dive simulation.
+NEW: High altitude (Plane/Fly) mode added
+NEW: Gaslist, Salinity, CNS and Average depth displayed in Logbook
+NEW: Internal logbook shows Gas changes
+NEW: Release in French, Spain, English and German (Use correct HEX file!)
+CHANGE: Set Time menu
+
+New in 1.83 beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: gas switch
+NEW: De/Activate gases underwater (Gaslist -> More -> Actve?)
+NEW: Gas Consumption caluculation in offline simulator (After Decoplan)
+NEW: CF56 Bottom gas usage (l/min or bar/min) (For Simulator)
+NEW: CF57 Ascent/deco gas usage (l/min or bar/min) (For Simulator)
+
+New in 1.82 beta:
+BETA Version - Do NOT use for diving!
+CHANGE: Speed optimization in Logbook
+NEW: Scale for Profile view in Logbook (10m,10min)
+
+New in 1.81 beta:
+BETA Version - Do NOT use for diving!
+NEW: Release in French, Spain and English (Use correct HEX file!)
+CHANGE: ZH-L16 display all stops (up to 96m), as ZH-L16-GF mode
+BUGFIX: Don't wrap TTS sum (still limit each stop display (not compute) to ~4h)
+NEW: CF54: =1:Display shallowest stop first (decoplan and divemode)
+BUGFIX: Inactive gases greyed-out in Simulator results
+BUGFIX: "Better Gas" now works for Gas 4 and Gas 5, as well
+NEW: GF_lo and GF_hi stored in logbook
+BUGFIX: Gradient factor reworked
+NEW: CF55: Additional delay for gas switch (decoplan, includng divemode)
+
+New in 1.80 Stable:
+Stable release
+BUGFIX: No Custom view in Surfacemode as default
+
+New in 1.76 Beta:
+BETA Version - Do NOT use for diving!
+NEW: "beta" is shown for beta versions
+CHANGE: NoFly and Desaturation time only visible when > 0
+CHANGE: "LowBatt!" Warning in Divemode
+
+New in 1.75 Beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: Decomask in Gauge mode removed
+NEW: Decoplan rewritten, now has practically unlimited number of stops (OSTC MK.2 only)
+NEW: Altimeter (OSTC MK.2 only)
+BUGFIX: Timeout reset in Customview  (OSTC MK.2 only)
+BUGFIX: Surface Interval
+NEW: Non-Resettable Average Depth (OSTC MK.2 only)
+NEW: CF41: Mix Type Icons in Surfacemode (OSTC MK.2 only)
+NEW: CF49: Show Altimeter in Surfacemode (OSTC MK.2 only)
+NEW: CF50: Show LogMarker in Divemode/Customview (OSTC MK.2 only)
+NEW: CF51: Show Stopwatch in Divemode/Customview (OSTC MK.2 only)
+NEW: CF52: Show Tissue Graph in Divemode/Customview (OSTC MK.2 only)
+NEW: CF53: Show Leading Tissue in Divemode/Customview (OSTC MK.2 only)
+NEW: CF39: Adjust fixed SetPoint if Diluent ppO2 > SetPoint (OSTC MK.2 only)
+BUGFIX: Custom view for Apnoe mode disabled
+BUGFIX: Custom view for Gauge mode adjusted
+
+New in 1.74 Beta:
+BETA Version - Do NOT use for diving!
+NEW: Added END (Equivalent narcotic depth) for GasSetup
+CHANGE: Limits for several Custom Functions  (OSTC MK.2 only)
+BUGFIX: Realtime Simulator menu
+NEW: Customview for Surfacemode (OSTC MK.2 only)
+NEW: Icon for Tank mix on Surface screen (OSTC MK.2 only)
+BUGFIX: Stopwatch Reset
+
+New in 1.73 Beta:
+BETA Version - Do NOT use for diving!
+NEW: Anti-Alised fonts (OSTC MK.2 only)
+NEW: Removed CF39 - Clock moved into Customview area  (OSTC Mk.2 only)
+NEW: Custom functions menu more comfortable  (OSTC Mk.2 only)
+BUGFIX: Surface interval now correct for repetitive dives
+CHANGE: Changes in divemode layout  (OSTC Mk.2 only)
+
+New in 1.72 Beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: TTS display while decoplan is displayed
+CHANGE: Stopwatch reset is blocked for one second after divemode menu exit (OSTC Mk.2 Only)
+NEW: Gas list is color-coded  in Color# Warnings if ppO2 of gas > CF18 (ppO2 High warning) (OSTC Mk.2 Only))
+CHANGE: Exchanged "Gaslist" and "Decoplan" in Divemode menu
+BUGFIX: ppO2 warning for very high ppO2 levels
+
+New in 1.71 Beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: Custom text can be 23chars again
+BUGFIX: Simulator descends to exact depth
+NEW: Added CF39: =1 shows clock in divemode (OSTC Mk.2 only)
+BUGFIX: Surface Interval not afffected from Simulator
+CHANGE: "Decosum" changed to "TTS" (Time to Surface)
+NEW: Up to 16 Deco Stops are displayed in Divemode and Simulator (GF Modes only)
+NEW: CF40 added (=1: Ceiling violation displayed in Color# Warnings (OSTC Mk.2 Only))
+
+New in 1.70 Stable:
+Stable release
+WARNING: This update will reset all Custom Functions!
+BUGFIX: Gas Changes for Simulator
+
+New in 1.65 Beta:
+This is the 1.70 Stable release candidate
+BETA Version - Do NOT use for diving!
+CHANGE: Restored original Gas Setup
+CHANGE: CF25 (Deco Debug) default to 0
+BUGFIX: Velocity warning (CF47) only for ascend
+
+New in 1.63 Beta:
+BETA Version - Do NOT use for diving!
+CHANGE: CF15 defines threshold for CNS display in Surfacemode (OSTC MK.2 only)
+NEW: CF48 sets positive clock offset [seconds/24h], added at Midnight
+BUGFIX: CNS restored after simulation
+
+New in 1.62 Beta:
+BETA Version - Do NOT use for diving!
+CHANGE: More space around divemode-menu
+CHANGE: Disabled "Delete Dive" in logbook
+CHANGE: Simulated dives are no longer stored in the logbook
+NEW: Simulator is much faster now
+NEW: New Simulation results screen
+BUGFIX: CF Warning displayed in Color# Warnings (OSTC Mk.2 only)
+NEW: Gas Setup sorts Gaslist
+NEW: Deco Code uses all Gases for forecast
+
+New in 1.61 Beta:
+BETA Version - Do NOT use for diving!
+CHANGE: "Better Gas" now blinks more eye catching
+CHANGE: Battery symbol range changed (OSTC Mk.2 Only)
+NEW: Added CF37: Color# Warnings (OSTC Mk.2 Only)
+NEW: Color# = 0,4,8,192,196 and 200 (Black or very dim) is ignored  (OSTC Mk.2 Only)
+BUGFIX: History not updated in Simulator mode
+BUGFIX: Fixed-Setpoint (minimum) ppO2 limited to physically possible value
+NEW: Depth, CNS, GF, ppO2 and Velocity are Color-coded (OSTC Mk.2 Only)
+NEW: CF43: Depth [mbar] for color-code display (OSTC Mk.2 Only)
+NEW: CF44: CNS [%] for color-code display (OSTC Mk.2 Only)
+NEW: CF45: GF [%] for color-code display (OSTC Mk.2 Only)
+NEW: CF46: ppO2 [cbar] for color-code display (OSTC Mk.2 Only)
+NEW: CF47: Velocity [m/min] for color-code display (OSTC Mk.2 Only)
+CHANGE: Change of color layout (OSTC Mk.2 Only)
+
+New in 1.60 Stable:
+Stable release
+
+New in 1.56 Beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: Inactive Gases in Divemode greyed out (OSTC Mk.2 only)
+NEW: Scale in Tissue Graph (OSTC Mk.2 only)
+NEW: Leading Tissue percent is displayed in Tissue Graph (OSTC Mk.2 only)
+NEW: Diluent is shown in Pre-Dive screen for CC modes
+
+New in 1.55 Beta:
+BETA Version - Do NOT use for diving!
+CHANGE: Greyed out gases more readable
+CHANGE: Removed "Delete All" from Logbook Menu
+NEW: CF42=1: Active Gas will blink if a better gas is available
+CHANGE: Returning from Bailout to CCR mode will not reset diluent gas
+
+New in 1.54 Beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: Freeze at startup
+
+New in 1.53 Beta:
+BETA Version - Do NOT use for diving!
+CHANGE: License moved into Menu
+NEW: Quick power on
+NEW: Not used O2 Sensors are not shown (OSTC1 only)
+NEW: O2 Board is automatically selected when found within the 1st second in divemode (OSTC1 only)
+NEW: Quick-View of Gaslist (Pre-Dive Check), press ENTER in Surfacemode
+
+New in 1.52 Beta:
+BETA Version - Do NOT use for diving!
+NEW: Fixed-Setpoint ppO2 limited to physically possible value
+BUGFIX: CF32 was displayed wrong on first call
+NEW: Gas change recommendation in divemode ('*' after Gas)
+CHANGE: "Const.ppO2 Setup" renamed to "CCR SetPoint Menu"
+BUGFIX: CF35 now affects all items in surface and divemode
+NEW: CF36 sets Divemode mask color (OSTC Mk.2 only)
+BUGFIX: CF15 removed (OSTC Mk.2 only)
+
+New in 1.51 Beta:
+BETA Version - Do NOT use for diving!
+BUGFIX: PC Simulator mode
+NEW: CF35 sets standard color
+BUGFIX: Display startup at very cold ambient temperatures
+BUGFIX: Battery voltage accuracy
+BUGFIX: Temperature accuracy
+BUGFIX: ppO2 is displayed in Bailout mode
+
+New in 1.50 Stable:
+Initial release for OSTC Mk.2

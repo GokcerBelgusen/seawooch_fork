@@ -1,0 +1,55 @@
+Byte38 im EEPROM=1:
+
+a - DISP Serial and Firmware version updated
+b - DISP Ambient pressure updated
+c - DISP Clock updated
+e - DISP Temperature updated
+d - DISP Date updated
+f - DISP Battery voltage updated
+g - DISP NoFly time updated
+h - DISP Desaturation time updated
+h - DISP Tissue saturation graph divemode updated
+i - DISP Tissue saturation graph surfacemode updated
+j - DISP const. ppO2 value surfacemode updated
+k - DISP cns value updated
+l - DISP Divemenu cursor updated
+m - DISP Divemode gaslist updated
+n - DISP Decoplan updated
+o - DISP Divemode menu updated
+p - DISP max Depth updated
+q - DISP Surfacemode startgas updated
+r - DISP Depth updated
+s - DISP Divemode active gas updated
+t - DISP ppO2 value divemode updated
+u - DISP Temperature divemode updated
+v - DISP Velocity updated
+w - DISP Gradient Factor updated
+x - DISP complete ascend time updated
+y - DISP decompression updated
+z - DISP NDL updated
+A - DISP Divetime updated
+B - Decompression algorithm started
+C - Decompression algorithm finished
+D - Profile Sample stored
+E - Decompression gas set
+F - Decompression gas reset
+G - Desaturation time calculation started
+H - Desaturation time calculation finished
+I - Surfmode/sleepmode desaturation calculation started
+J - Surfmode/sleepmode desaturation calculation finished
+K - calculate noflytime percentage started
+L - calculate noflytime percentage finished
+M - I2C Bus Timeout
+N - I2C Bus Failed
+O - I2C Bus Restored
+P - Stand-alone Simulator started
+Q - Divemode init started
+R - Divemode init finished
+S - Tissues copy start
+T - Tissue copy done.
+U - Average Depth Display updated
+V - Gauge mode Stopwatch updated
+W - CNS Surfacemode updated
+X - Customview toggle start
+Y - Customview toggle end
+

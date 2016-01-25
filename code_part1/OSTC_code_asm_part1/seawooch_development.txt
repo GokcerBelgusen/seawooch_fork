@@ -1,0 +1,88 @@
+
+#IFDEF CCR_CTRL_
+menu_ccr_ctrl_setup:     		; CCR Controller Setup
+	movlw	d'1'
+	movwf	menupos
+
+menu_ccr_ctrl0:
+	call	DISP_ClearScreen
+	call	DISP_topline_box
+
+	WIN_INVERT	.1			; Init new Wordprocessor
+	DISPLAYTEXTH	.388	; CCR Controller Setup
+	WIN_INVERT	.0			; Init new Wordprocessor
+
+menu_ccr_ctrl_1:
+	WIN_LEFT 	.20
+	WIN_TOP		.35
+	lfsr	FSR2,letter
+	OUTPUTTEXTH	.389		;
+
+; Add parameters configuration here !!!
+
+	DISPLAYTEXT	.11			; Exit
+	call	wait_switches		; Waits until switches are released, resets flag if button stays pressed!
+	call	menu_pre_loop_common		; Clear some menu flags, timeout and switches
+	call	DISP_menu_cursor
+
+menu_ccr_ctrl_loop:
+	call	check_switches_logbook
+
+	btfsc	menubit3
+	bra		menu_ccr_ctrl_2	; move cursor
+
+	btfsc	menubit2
+	bra		do_menu_ccr_ctrl		; call submenu
+
+	btfsc	onesecupdate
+	call	menu_check_dive_and_timeout	; "Goto restart" or sets sleepmode flag
+
+	bcf		onesecupdate	; 1 sec. functions done
+
+	btfsc	sleepmode
+	goto		exit_menu_const_ppO2
+
+	bra		menu_ccr_ctrl_loop
+
+menu_ccr_ctrl_2:
+	incf	menupos,F
+
+	movlw	d'2'
+	cpfseq	menupos				; =2?
+	bra		menu_ccr_ctrl_2a	; No
+	movlw	d'6'
+	movwf	menupos             ; Skip to EXIT
+
+menu_ccr_ctrl_2a:
+	movlw	d'7'
+	cpfseq	menupos			; =7?
+	bra		menu_ccr_ctrl_3	; No - Roll over from top...
+	movlw	d'1'
+	movwf	menupos
+
+menu_ccr_ctrl_3:
+	call	menu_pre_loop_common		; Clear some menu flags, timeout and switches
+	call	DISP_menu_cursor
+	bra		menu_ccr_ctrl_loop
+
+do_menu_ccr_ctrl:
+	dcfsnz	menupos,F
+	bra		change_ccr_mode
+	dcfsnz	menupos,F
+	bra		change_ccr_mode
+	dcfsnz	menupos,F
+	bra		change_ccr_mode
+	dcfsnz	menupos,F
+	bra		change_ccr_mode
+	dcfsnz	menupos,F
+	bra		change_ccr_mode
+	movlw	d'3'
+	movwf	menupos
+    goto    menu_const_ppO2_return
+
+change_ccr_mode:
+	bra		menu_ccr_ctrl_1
+
+	return
+
+#ENDIF
