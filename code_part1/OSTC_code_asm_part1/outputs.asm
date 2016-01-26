@@ -4358,6 +4358,7 @@ DISP_show_ceiling_1:
     movff       int_O_ceiling+0,lo
     movff       int_O_ceiling+1,hi
     call        adjust_depth_with_salinity			; computes salinity setting into lo:hi [mbar]
+
 #IFDEF IMPERIAL
 	GETCUSTOM8  d'41'				; Check CF#41 Conversion to imperial units
 	btfsc   WREG,0							; Enabled ?
@@ -4378,6 +4379,43 @@ DISP_show_ceiling_1b:
 #ENDIF
     STRCAT_PRINT ""
     return
+
+#IFDEF V_CEILING
+DISP_show_v_ceiling:
+    call		DISP_divemask_color ; Set Color for Divemode mask
+	WIN_FONT	FT_SMALL
+    DISPLAYTEXT	d'370'              ; V.Ceiling
+DISP_show_v_ceiling_1:
+    call	DISP_standard_color
+    WIN_FONT	FT_MEDIUM
+	WIN_LEFT	.100
+	WIN_TOP		.195
+    lfsr        FSR2,letter
+    movff       int_O_v_ceiling+0,lo
+    movff       int_O_v_ceiling+1,hi
+    call        adjust_depth_with_salinity			; computes salinity setting into lo:hi [mbar]
+
+#IFDEF IMPERIAL
+	GETCUSTOM8  d'41'				; Check CF#41 Conversion to imperial units
+	btfsc   WREG,0							; Enabled ?
+	bra DISP_show_v_ceiling_1a    			; NO
+	call	convert_meters_to_feet2			; converts meters to feet, don't check CF#61
+	bcf		leftbind
+	bsf		ignore_digit4					; do not display feet fractions
+	output_16
+	bcf		ignore_digit4
+    bra     DISP_show_v_ceiling_1b
+DISP_show_v_ceiling_1a:
+#ENDIF
+    bsf         ignore_digit5         ; no cm
+    output_16dp  .3               ; yxz.a
+    bcf         ignore_digit5
+#IFDEF IMPERIAL
+DISP_show_v_ceiling_1b:
+#ENDIF
+    STRCAT_PRINT ""
+    return
+#ENDIF
 
 ;=============================================================================
 ; Display EAD/END computed in calc_hauptroutine_update_tissues() every 2sec.

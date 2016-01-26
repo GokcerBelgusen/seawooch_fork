@@ -561,7 +561,11 @@
     TCODE    .0,    .0,      ""		                     ;367 unused
     TCODE    .0,    .0,      ""		                     ;368 unused
     TCODE    .0,    .0,      ""		                     ;369 unused
-    TCODE    .0,    .0,      ""		                     ;370 unused
+    #IFDEF V_CEILING
+     TCODE    .93,   .170,    "V.Ceiling"                 ;370 Variable ceiling display
+    #ELSE
+     TCODE    .0,    .0,      ""                          ;370 unused
+    #END
     TCODE    .0,    .0,      ""		                     ;371 unused
     TCODE    .0,    .0,      ""		                     ;372 unused
     TCODE    .0,    .0,      ""		                     ;373 unused

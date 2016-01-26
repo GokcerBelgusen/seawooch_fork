@@ -560,6 +560,9 @@ static unsigned char calc_nextdecodepth(void)
 
         sim_limit( GF_low );
         p = sim_lead_tissue_limit - pres_surface;
+        #ifdef V_CEILING_ENABLED
+        int_O_v_ceiling = (short)(p*1000);
+        #endif
         p *= BAR_TO_METER;
         if( p <= 0.0f )
             goto no_deco_stop;          // We can surface directly...

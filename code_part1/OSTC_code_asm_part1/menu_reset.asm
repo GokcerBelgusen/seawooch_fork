@@ -232,7 +232,11 @@ cf_default_table2:
 	CF_DEFAULT    CF_INT8,      d'0',   d'0',   d'0'    ; CF78 unused
 
 	CF_DEFAULT    CF_INT8,      d'0',   d'0',   d'0'    ; CF79 unused
-	CF_DEFAULT    CF_INT8,      d'0',   d'0',   d'0'    ; CF80 unused
+  #IFDEF V_CEILING
+	CF_DEFAULT    CF_BOOL,	    d'1',   0,      0       ; CF80 warn_v_ceiling_divemode	=1 Warn v_ceiling
+  #ELSE
+    CF_DEFAULT    CF_INT8,      d'0',   d'0',   d'0'    ; CF80 unused
+  #END	
 	CF_DEFAULT    CF_INT8,      d'0',   d'0',   d'0'    ; CF81 unused
 #ENDIF
 	CF_DEFAULT    CF_INT8,      d'0',   d'0',   d'0'    ; CF82 unused

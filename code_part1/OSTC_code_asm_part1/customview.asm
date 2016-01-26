@@ -112,6 +112,10 @@ customview_second:
     bra     customview_1sec_show_deco_gas
     dcfsnz	WREG,F
     bra     customview_1sec_show_ceiling
+#IFDEF V_CEILING
+    dcfsnz	WREG,F
+    bra     customview_1sec_show_v_ceiling
+#ENDIF
 #IFDEF CCR_CTRL                             ; New Custom view ittem added:
     dcfsnz	WREG,F
     bra     customview_1sec_show_sensor_mv  ; Show CCR Sensor values in mV
@@ -173,6 +177,11 @@ customview_1sec_show_deco_gas:
 customview_1sec_show_ceiling:
     goto    DISP_show_ceiling_1         ; Update the ceiling
 
+#IFDEF V_CEILING
+customview_1sec_show_v_ceiling:
+    goto    DISP_show_v_ceiling_1         ; Update the Variable Ceiling
+#ENDIF
+
 #IFDEF CCR_CTRL
 customview_1sec_show_sensor_mv:
 	goto	DISP_show_sensor_mv			; Show O2 Sensors mV
@@ -216,6 +225,10 @@ customview_minute:
     bra     customview_minute_show_deco_gas ; Show the next decogas
     dcfsnz	WREG,F
     bra     customview_minute_show_ceiling  ; Update the ceiling
+#IFDEF V_CEILING
+    dcfsnz	WREG,F
+    bra     customview_minute_show_v_ceiling  ; Update the Variable Ceiling
+#ENDIF
 #IFDEF CCR_CTRL
     dcfsnz	WREG,F
     bra     customview_minute_show_sensor_mv ; Show CCR Sensor values in mV
@@ -242,6 +255,9 @@ customview_minute_graphs:               ; Do nothing extra
 customview_minute_pSCR_ppO2:            ; Do nothing extra
 customview_minute_show_deco_gas:        ; Do nothing extra
 customview_minute_show_ceiling:         ; Do nothing extra
+#IFDEF V_CEILING
+customview_minute_show_v_ceiling:         ; Do nothing extra
+#ENDIF
 #IFDEF CCR_CTRL
 customview_minute_show_sensor_mv:       ; Do nothing extra
 customview_minute_show_scrub_lif:       ; Do nothing extra
@@ -253,7 +269,11 @@ customview_minute_show_scrub_lif:       ; Do nothing extra
 #IFDEF CCR_CTRL
 customview_toggle_main:                     ; Additional bra since long code introduced by CCR support
 #ELSE
-customview_toggle:
+  #IFDEF V_CEILING
+  customview_toggle_main:                     ; Additional bra since long code introduced by CCR support
+  #ELSE
+  customview_toggle:
+  #ENDIF
 #ENDIF
 
 	bcf		menu3_active	            ;=1: menu entry three in divemode menu is active		
@@ -265,6 +285,10 @@ customview_toggle2:
 	bra		customview_toggle_exit			; Yes, ignore custom view in divemode completely
 
 	movlw	d'13'							; Max number
+#IFDEF V_CEILING
+	movlw	d'14'							; Max number
+#ENDIF
+
 #IFDEF CCR_CTRL
     btfsc   ext_ppO2_enable                 ; Additional Customviews only in CCR mode
 	movlw	d'15'							; Max number
@@ -308,6 +332,10 @@ customview_mask:
 	bra		customview_init_show_deco_gas   ; 12: Show deco gas
     dcfsnz	WREG,F
 	bra		customview_init_show_ceiling    ; 13: Show ceiling
+#IFDEF V_CEILING
+    dcfsnz	WREG,F
+	bra		customview_init_show_v_ceiling    ; 14: Show Variable Ceiling
+#ENDIF	
 #IFDEF CCR_CTRL
     dcfsnz	WREG,F
 	bra		customview_init_show_sensor_mv  ; 14: Show O2 sensors mV
@@ -384,6 +412,11 @@ customview_init_ead_end:
 	bra		    customview_toggle_exit	
 
 #IFDEF CCR_CTRL
+customview_toggle:
+    bra customview_toggle_main          ; Additional bra since long code introduced by CCR support
+#ENDIF
+
+#IFDEF V_CEILING
 customview_toggle:
     bra customview_toggle_main          ; Additional bra since long code introduced by CCR support
 #ENDIF
@@ -479,6 +512,14 @@ customview_init_show_ceiling:
 	bra			customview_toggle		; Yes, use next Customview!
     call        DISP_show_ceiling       ; Update the ceiling
     bra         customview_toggle_exit
+
+#IFDEF V_CEILING
+customview_init_show_v_ceiling:
+    btfsc		no_deco_customviews		; no-deco-mode-flag = 1
+	bra			customview_toggle		; Yes, use next Customview!
+    call        DISP_show_v_ceiling     ; Update the Variable Ceiling
+    bra         customview_toggle_exit
+#ENDIF
 
 #IFDEF CCR_CTRL
 customview_init_show_sensor_mv:

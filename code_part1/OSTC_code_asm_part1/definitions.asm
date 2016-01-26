@@ -27,6 +27,7 @@
   #DEFINE EE512                             ; Using I2C EEPROM 24LC512
   #DEFINE IMPERIAL                          ; Compilation with Imperial Units. By Vlad Karpinskiy <zlatkarp@gmail.com>
 
+  #DEFINE V_CEILING
 ;  #DEFINE CCR_CTRL                          ; CCR Controller support.
   #IFDEF CCR_CTRL
     #DEFINE CCR_CTRL_DBG_P                  ; TODO: !!!! DEBUG VERSION OF THE DIVE MODE MENU WITH P CORRECTION

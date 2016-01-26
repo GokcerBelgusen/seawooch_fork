@@ -384,7 +384,11 @@
     TCODE    .40,   .35,     "unused         "           ;206 unused
     TCODE    .40,   .35,     "unused         "           ;207 unused
     TCODE    .40,   .35,     "unused         "           ;208 unused
-    TCODE    .40,   .35,     "unused         "           ;209 unused
+    #IFDEF V_CEILING
+     TCODE    .40,   .35,     "V. Ceiling     "           ;209 Variable ceiling
+    #ELSE
+     TCODE    .40,   .35,     "unused         "           ;209 unused
+    #ENDIF    
     TCODE    .40,   .35,     "unused         "           ;210 unused
 #ENDIF
     TCODE    .40,   .35,     "unused         "           ;211 unused
@@ -602,7 +606,11 @@
     TCODE    .0,    .0,      ""		                     ;367 unused
     TCODE    .0,    .0,      ""		                     ;368 unused
     TCODE    .0,    .0,      ""		                     ;369 unused
-    TCODE    .0,    .0,      ""		                     ;370 unused
+    #IFDEF V_CEILING
+     TCODE    .93,   .170,    "V.Ceiling"                 ;370 Variable ceiling display
+    #ELSE
+     TCODE    .0,    .0,      ""                          ;370 unused
+    #ENDIF
     TCODE    .0,    .0,      ""		                     ;371 unused
     TCODE    .0,    .0,      ""		                     ;372 unused
     TCODE    .0,    .0,      ""		                     ;373 unused
