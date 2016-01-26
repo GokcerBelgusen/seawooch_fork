@@ -53,7 +53,7 @@ BETA Version
 BUGFIX: False bailout flag in logbook
 NEW: On-Time counter for better battery information
 NEW: Store useage timer in logbook header (Byte 54, see documentation)
-NEW: CF74: Battery Timeout [min] - Battery symbol will blink if the OSTC was
+NEW: CF74: Battery Timeout [min] - Battery symbol will blink if the OSTC was 
      longer in active mode (since the last _full_ charge) then CF74.
      Default=1800 (30hours)
 
@@ -314,7 +314,7 @@ Stable release
 BUGFIX: Fixing 32kB boundary read for logbook
 
 New in 1.98 beta:
-BUGFIX bad first Tpï¿½ and ceiling values in logbook curves.
+BUGFIX bad first Tp° and ceiling values in logbook curves.
 
 New in 1.97 beta:
 NEW: Logbook displays ceilings and temperature curve.
@@ -354,7 +354,7 @@ BUGFIX: Ignore depths>130m in PC simulation
 BUGFIX: Avoid spurious CF55 stops with 3 gas or more
 BUGFIX: Average depth in Logbook (For dives made with >=1.91)
 BUGFIX: Logbook time scale (squares are 10min * 10m)
-BUGFIX: Bï¿½hlmann half-times rounded to the minute
+BUGFIX: Bühlmann half-times rounded to the minute
 BUGFIX: Protect again rare race contition on pressure/temperature
 BUGFIX: Time is now accurate
 CHANGE: CF02 now allows delay of more then 240seconds
@@ -531,7 +531,7 @@ BUGFIX: CNS restored after simulation
 
 New in 1.62 Beta:
 BETA Version - Do NOT use for diving!
-CHANGE: More space around divemode-menu
+CHANGE: More space around divemode-menu 
 CHANGE: Disabled "Delete Dive" in logbook
 CHANGE: Simulated dives are no longer stored in the logbook
 NEW: Simulator is much faster now

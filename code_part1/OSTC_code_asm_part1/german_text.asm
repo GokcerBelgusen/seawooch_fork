@@ -23,7 +23,7 @@
 ; 2011/03/29 : Oliver J. Albrecht: German translation.
 ;
 ; known bugs:
-; ToDo:
+; ToDo: 
 ;=============================================================================
 ;
 ; Instructions for translating:
@@ -36,17 +36,17 @@
 ;
 ; * One of the main constraint is to keep texts short, to avoid clobering
 ;   the OSTC screen. Of course, the technical, precise terms should be used.
-;   Generally, there is no hard constraint: you can be one or two chars
+;   Generally, there is no hard constraint: you can be one or two chars 
 ;   shorter or longer.
-;
-; * Beware that some strings do have a fixed length. You should then use
+; 
+; * Beware that some strings do have a fixed length. You should then use 
 ;   exactly the same size.
 ;
 ; * Beware that some strings have ponctuation, or trailling space(s). In that
 ;   case, you should keep EXACTLY the same ponctuation AND TRAILING SPACES.
 ;
-; * Ascii chars: we can support a few specific chars. ï¿½ï¿½ï¿½ï¿½ for German.
-;   ï¿½ï¿½ï¿½ï¿½ for French. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ for Spanish.
+; * Ascii chars: we can support a few specific chars. öäüß for German.
+;   éèêç for French. áíóúñ¡¿ for Spanish.
 ;   If you really, absolutly, need more: ask...
 ;
 ; * Do not translate comments (everithing after the ;), because they are
@@ -59,58 +59,58 @@
 ;=============================================================================
 ; Define's section
 ;   Definition			     translation                 ; English original
-#IFNDEF	TXT_DEFINED
-#DEFINE	TXT_DEFINED
-
-#DEFINE	TXT_GAS_C		     'G'                         ; 'G'
+#IFNDEF	TXT_DEFINED                                                           
+#DEFINE	TXT_DEFINED                                                           
+                                                                              
+#DEFINE	TXT_GAS_C		     'G'                         ; 'G'                    
 #DEFINE	TXT_GAS1			 "G"                         ; "G"
-#DEFINE	TXT_METER_C		     'm'                         ; 'm'
-#DEFINE	TXT_METER5		     "m    "                     ; "m    "
-#DEFINE	TXT_METER3		     "m  "                       ; "m  "
-#DEFINE	TXT_METER2		     "m "                        ; "m "
-#DEFINE	TXT_METER1		     "m"                         ; "m"
-#DEFINE	TXT_MBAR7		     " mbar  "                   ; " mbar  "
-#DEFINE	TXT_MBAR5		     "mbar "                     ; "mbar "
-#DEFINE	TXT_BAR4		     "bar "                      ; "bar "
+#DEFINE	TXT_METER_C		     'm'                         ; 'm'                    
+#DEFINE	TXT_METER5		     "m    "                     ; "m    "                
+#DEFINE	TXT_METER3		     "m  "                       ; "m  "                  
+#DEFINE	TXT_METER2		     "m "                        ; "m "                   
+#DEFINE	TXT_METER1		     "m"                         ; "m"                    
+#DEFINE	TXT_MBAR7		     " mbar  "                   ; " mbar  "              
+#DEFINE	TXT_MBAR5		     "mbar "                     ; "mbar "                
+#DEFINE	TXT_BAR4		     "bar "                      ; "bar "                 
 #DEFINE	TXT_BAR3			 "bar"                       ; "bar"
-#DEFINE	TXT_ALT5		     "Alt: "                     ; "Alt: "
-#DEFINE	TXT_KGL4		     "kg/l"                      ; "kg/l"
+#DEFINE	TXT_ALT5		     "Alt: "                     ; "Alt: "                
+#DEFINE	TXT_KGL4		     "kg/l"                      ; "kg/l"                 
 #DEFINE	TXT_VOLT2			 "V "                        ; "V "
-#DEFINE	TXT_VOLT1		     "V"                         ; "V"
+#DEFINE	TXT_VOLT1		     "V"                         ; "V"                    
 #DEFINE	TXT_STEP5		     "Stufe:"                    ; "Step:"
-#DEFINE	TXT_CF2			     "CF"                        ; "CF"
-#DEFINE	TXT_O2_4		     "O2: "                      ; "O2: "
-#DEFINE	TXT_O2_3		     "O2 "                       ; "O2 "
-#DEFINE	TXT_AIR4		     "AIR "                      ; "AIR "
-#DEFINE	TXT_ERR4		     "ERR "                      ; "ERR "
-#DEFINE	TXT_HE4			     "He: "                      ; "He: "
-#DEFINE	TXT_NX3			     "NX "                       ; "NX "
-#DEFINE	TXT_TX3			     "TX "                       ; "TX "
+#DEFINE	TXT_CF2			     "CF"                        ; "CF"                   
+#DEFINE	TXT_O2_4		     "O2: "                      ; "O2: "                 
+#DEFINE	TXT_O2_3		     "O2 "                       ; "O2 "                  
+#DEFINE	TXT_AIR4		     "AIR "                      ; "AIR "                 
+#DEFINE	TXT_ERR4		     "ERR "                      ; "ERR "                 
+#DEFINE	TXT_HE4			     "He: "                      ; "He: "                 
+#DEFINE	TXT_NX3			     "NX "                       ; "NX "                  
+#DEFINE	TXT_TX3			     "TX "                       ; "TX "                  
 #DEFINE	TXT_AT4			     " in "                      ; " at "
-#DEFINE	TXT_G1_3		     "G1:"                       ; "G1:"
-#DEFINE	TXT_G2_3		     "G2:"                       ; "G2:"
-#DEFINE	TXT_G3_3		     "G3:"                       ; "G3:"
-#DEFINE	TXT_G4_3		     "G4:"                       ; "G4:"
-#DEFINE	TXT_G5_3		     "G5:"                       ; "G5:"
-#DEFINE	TXT_G6_3		     "G6:"                       ; "G6:"
-#DEFINE	TXT_1ST4		     "1st:"                      ; "1st:"
-#DEFINE	TXT_CNS4		     "CNS:"                      ; "CNS:"
-#DEFINE	TXT_CNSGR10		     "CNS > 250%"                ; "CNS > 250%"
-#DEFINE	TXT_AVR4		     "Avr:"                      ; "Avr:"
-#DEFINE	TXT_GF3			     "GF:"                       ; "GF:"
-#DEFINE	TXT_SAT4		     "Sat:"                      ; "Sat:"
+#DEFINE	TXT_G1_3		     "G1:"                       ; "G1:"                  
+#DEFINE	TXT_G2_3		     "G2:"                       ; "G2:"                  
+#DEFINE	TXT_G3_3		     "G3:"                       ; "G3:"                  
+#DEFINE	TXT_G4_3		     "G4:"                       ; "G4:"                  
+#DEFINE	TXT_G5_3		     "G5:"                       ; "G5:"                  
+#DEFINE	TXT_G6_3		     "G6:"                       ; "G6:"                  
+#DEFINE	TXT_1ST4		     "1st:"                      ; "1st:"                 
+#DEFINE	TXT_CNS4		     "CNS:"                      ; "CNS:"                 
+#DEFINE	TXT_CNSGR10		     "CNS > 250%"                ; "CNS > 250%"           
+#DEFINE	TXT_AVR4		     "Avr:"                      ; "Avr:"                 
+#DEFINE	TXT_GF3			     "GF:"                       ; "GF:"                  
+#DEFINE	TXT_SAT4		     "Sat:"                      ; "Sat:"                 
 #DEFINE	TXT_0MIN5			 "0min "                     ; "0min "
-#DEFINE	TXT_MIN4			 "min "                      ; "min "
-#DEFINE	TXT_BSAT5			 "BSat:"                     ; "BSat:"
-#DEFINE	TXT_BDES5			 "BDes:"                     ; "BDes:"
-#DEFINE	TXT_LAST5			 "Last:"                     ; "Last:"
+#DEFINE	TXT_MIN4			 "min "                      ; "min "  
+#DEFINE	TXT_BSAT5			 "BSat:"                     ; "BSat:" 
+#DEFINE	TXT_BDES5			 "BDes:"                     ; "BDes:" 
+#DEFINE	TXT_LAST5			 "Last:"                     ; "Last:" 
 #DEFINE	TXT_GFLO6			 "GF_lo:"                    ; "GF_lo:"
 #DEFINE	TXT_GFHI6			 "GF_hi:"                    ; "GF_hi:"
-#DEFINE	TXT_PPO2_5			 "ppO2:"                     ; "ppO2:"
-#DEFINE	TXT_SP2				 "SP"                        ; "SP"
-#DEFINE	TXT_DIL4			 "Dil:"                      ; "Dil:"
-#DEFINE	TXT_N2_2			 "N2"                        ; "N2"
-#DEFINE	TXT_HE2				 "He"                        ; "He"
+#DEFINE	TXT_PPO2_5			 "ppO2:"                     ; "ppO2:" 
+#DEFINE	TXT_SP2				 "SP"                        ; "SP"    
+#DEFINE	TXT_DIL4			 "Dil:"                      ; "Dil:"  
+#DEFINE	TXT_N2_2			 "N2"                        ; "N2"    
+#DEFINE	TXT_HE2				 "He"                        ; "He"    
 #DEFINE	TXT_TX1				 "T"						 ; "T"
 #DEFINE	TXT_TX2				 "x"						 ; "x"
 #DEFINE	TXT_NX1				 "N"						 ; "N"
@@ -120,43 +120,43 @@
 #DEFINE TXT_aGF4             "aGF:"                      ; "aGF:"
 #DEFINE TXT_BATT             "B:"                        ; "B:"
 
-
-#ENDIF
+                                                                         
+#ENDIF                                                                   
 ;=============================================================================
 ;   macro     X     Y        "translation"               ; English original
     TCODE    .0,   .0,       "Erstelle MD2 Hash"         ;001 Building MD2 Hash
     TCODE    .0,   .25,      "Bitte warten..."           ;002 Please Wait...
     TCODE    .0,   .2,       "HeinrichsWeikamp OSTC2"    ;003 HeinrichsWeikamp OSTC2
-    TCODE    .65,  .2,       "Menï¿½?"                     ;004 Menu?
-    TCODE    .65,  .2,       "Menï¿½:"                     ;005 Menu:
+    TCODE    .65,  .2,       "Menü?"                     ;004 Menu?
+    TCODE    .65,  .2,       "Menü:"                     ;005 Menu:
     TCODE    .20,  .35,      "Logbuch"                   ;006 Logbook
     TCODE    .20,  .65,      "Gas-Einstellungen"         ;007 Gas Setup
     TCODE    .20,  .35,      "Uhrzeit einstellen"        ;008 Set Time
-    TCODE    .20,  .95,      "Daten Zurï¿½cksetzen"        ;009 Reset Menu
+    TCODE    .20,  .95,      "Daten Zurücksetzen"        ;009 Reset Menu
     TCODE    .20,  .125,     "Einstellungen"             ;010 Setup
     TCODE    .20,  .185,     "Ende"                      ;011 Exit
     TCODE    .97, .2,        "Warten..."                 ;012 Wait...
     TCODE    .0,   .24,      "MD2 Hash:"                 ;013 MD2 Hash:
-    TCODE    .0,   .0,       "Entsï¿½"                     ;014 Desat         (Desaturation count-down)
+    TCODE    .0,   .0,       "Entsä"                     ;014 Desat         (Desaturation count-down)
     TCODE    .50,  .2,       "Interface"                 ;015 Interface		(Connected to USB)
     TCODE    .10,  .30,      "Start"                     ;016 Start
     TCODE    .10,  .55,      "Daten"                     ;017 Data
     TCODE    .10,  .80,      "Kopfzeile"                 ;018 Header
     TCODE    .10,  .105,     "Profil"                    ;019 Profile
     TCODE    .10,  .130,     "Fertig."                   ;020 Done.
-    TCODE    .20,  .35,      "Zurï¿½cksetzen abbr."        ;021 Cancel Reset
+    TCODE    .20,  .35,      "Zurücksetzen abbr."        ;021 Cancel Reset
     TCODE    .32,  .65,      "Uhrzeit:"                  ;022 Time:
     TCODE    .32,  .95,      "Datum:"                    ;023 Date:
     TCODE    .0,   .215,     "Einst.Stunden"             ;024 Set Hours
-    TCODE    .6,   .0,       "Zurï¿½cksetzen..."           ;025 Reset...
+    TCODE    .6,   .0,       "Zurücksetzen..."           ;025 Reset...
     TCODE    .55,  .2,       "Logbuch"                   ;026 Logbook
     TCODE    .14,  .2,       "Custom Funktionen I"       ;027 Custom Functions I
-    TCODE    .14,  .2,       "Daten Zurï¿½cksetzen"        ;028 Reset Menu
+    TCODE    .14,  .2,       "Daten Zurücksetzen"        ;028 Reset Menu
     TCODE    .14,  .2,       "Uhrzeit einstellen:"       ;029 Set Time:
     TCODE    .100, .50,      "Markern"                   ;030 SetMarker         (Add a mark in logbook profile)
     TCODE    .100, .25,      "Dekoplan"                  ;031 Decoplan
     TCODE    .100, .0,       "Gasliste"                  ;032 Gaslist
-    TCODE    .100, .50,      "DTiefeLï¿½"                  ;033 ResetAvr          (Reset average depth)
+    TCODE    .100, .50,      "DTiefeLö"                  ;033 ResetAvr          (Reset average depth)
     TCODE    .100, .100,     "Ende"                      ;034 Exit		        (Exit current menu)
     TCODE    .0,   .0,       "Flugv"                     ;035 NoFly		        (No-flight count-down)
 ;
@@ -165,15 +165,15 @@
     TCODE    .40,  .35,      "TG Ende     [m]"           ;037 End Dive    [m]	(depth to switch back to surface mode)
     TCODE    .40,  .35,      "TGNachlauf[sek]"           ;038 End Delay [sec]  	(duration dive screen stays after end of dive)
     TCODE    .40,  .35,      "Standby   [min]"           ;039 Power Off [min]
-    TCODE    .40,  .35,      "Pre-Menï¿½  [min]"           ;040 Pre-menu  [min]	(Delais to keep surface-mode menus displayed)
+    TCODE    .40,  .35,      "Pre-Menü  [min]"           ;040 Pre-menu  [min]	(Delais to keep surface-mode menus displayed)
     TCODE    .40,  .35,      "Geschw. [m/min]"           ;041 velocity[m/min]
     TCODE    .40,  .35,      "Aufwachen[mbar]"           ;042 Wake-up  [mbar]
     TCODE    .40,  .35,      "max.Ober.[mbar]"           ;043 max.Surf.[mbar]
     TCODE    .40,  .35,      "GF Anzeige  [%]"           ;044 GF display  [%]
     TCODE    .40,  .35,      "min. O2 Dis.[%]"           ;045 min. O2 Dis.[%]
-    TCODE    .40,  .35,      "TG Menï¿½s  [min]"           ;046 Dive menus[min]
-    TCODE    .40,  .35,      "Sï¿½ttigung x [%]"           ;047 Saturate x  [%]
-    TCODE    .40,  .35,      "Entsï¿½tt. x  [%]"           ;048 Desaturate x[%]
+    TCODE    .40,  .35,      "TG Menüs  [min]"           ;046 Dive menus[min]
+    TCODE    .40,  .35,      "Sättigung x [%]"           ;047 Saturate x  [%]
+    TCODE    .40,  .35,      "Entsätt. x  [%]"           ;048 Desaturate x[%]
     TCODE    .40,  .35,      "Flugv.Ratio [%]"           ;049 NoFly Ratio [%]	(Grandient factor tolerance for no-flight countdown).
     TCODE    .40,  .35,      "GF Alarm 1  [%]"           ;050 GF alarm 1  [%]
     TCODE    .40,  .35,      "CNSAnzOberf.[%]"           ;051 CNSshow surf[%]
@@ -181,15 +181,15 @@
     TCODE    .40,  .35,      "ppO2 min. [bar]"           ;053 ppO2 low  [bar]
     TCODE    .40,  .35,      "ppO2 max. [bar]"           ;054 ppO2 high [bar]
     TCODE    .40,  .35,      "ppO2 anz. [bar]"           ;055 ppO2 show [bar]
-    TCODE    .40,  .35,      "Abtastrate     "           ;056 sampling rate
-    TCODE    .40,  .35,      "Divisor Temp   "           ;057 Divisor Temp
+    TCODE    .40,  .35,      "Abtastrate     "           ;056 sampling rate  
+    TCODE    .40,  .35,      "Divisor Temp   "           ;057 Divisor Temp   
     TCODE    .40,  .35,      "Divisor Dekodat"           ;058 Divisor Decodat
     TCODE    .40,  .35,      "Divisor GF     "           ;059 Divisor GF
-    TCODE    .40,  .35,      "Divisor ppO2   "           ;060 Divisor ppO2
+    TCODE    .40,  .35,      "Divisor ppO2   "           ;060 Divisor ppO2 
     TCODE    .40,  .35,      "Divisor Dekopln"           ;061 Divisor Decopln
     TCODE    .40,  .35,      "Divisor CNS    "           ;062 Divisor CNS
     TCODE    .40,  .35,      "CNS-Anz. TG [%]"           ;063 CNSshow dive[%]
-    TCODE    .40,  .35,      "Logbuch Versatz"           ;064 Logbook offset
+    TCODE    .40,  .35,      "Logbuch Versatz"           ;064 Logbook offset 
     TCODE    .40,  .35,      "Letzte Deko [m]"           ;065 Last Deco at[m]
     TCODE    .40,  .35,      "Apnoe Ende  [h]"           ;066 End Apnoe   [h]
     TCODE    .40,  .35,      "Zeige Batterie%"           ;067 Show Battery %
@@ -198,12 +198,12 @@
 ;licence:
     TCODE    .0,   .35,      "Dieses Programm wird"      ;068 This program is
     TCODE    .0,   .65,      "in der Hoffnung bereit"    ;069 distributed in the
-	TCODE    .0,   .95,      "gestellt, dass es nï¿½tz"    ;070 hope that it will be
+	TCODE    .0,   .95,      "gestellt, dass es nütz"    ;070 hope that it will be
     TCODE    .0,   .125,     "lich ist, aber OHNE"       ;071 useful, but WITHOUT
     TCODE    .0,   .155,     "JEDE GEWAEHRLEISTUNG,"     ;072 ANY WARRANTY
     TCODE    .0,   .185,     "auch keine implizierte"    ;073 even the implied
     TCODE    .0,   .215,     "Gebrauchstauglichkeit"     ;074 warranty of
-    TCODE    .0,   .35,      "oder Eignung fï¿½r einen"    ;075 MERCHANTABILITY or
+    TCODE    .0,   .35,      "oder Eignung für einen"    ;075 MERCHANTABILITY or
     TCODE    .0,   .65,      "bestimmten Zweck."         ;076 FITNESS FOR A
     TCODE    .0,   .95,      "Weitere Informationen"     ;077 PARTICULAR PURPOSE.
     TCODE    .0,   .125,     "finden Sie in der GNU"     ;078 See the GNU General
@@ -221,18 +221,18 @@
     TCODE    .0,    .0,      "Erstes Gas?"               ;088 First Gas?
     TCODE    .0,    .0,      "Standard:"                 ;089 Default:
     TCODE    .0,    .0,      "Minuten"                   ;090 Minutes
-    TCODE    .0,    .0,      "Monat  "                   ;091 Month
-    TCODE    .0,    .0,      "Tag    "                   ;092 Day
-    TCODE    .0,    .0,      "Jahr   "                   ;093 Year
-    TCODE    .0,    .0,      "Einst."                    ;094 Set
-    TCODE    .0,    .0,      "Gas# "                     ;095 Gas#
+    TCODE    .0,    .0,      "Monat  "                   ;091 Month  
+    TCODE    .0,    .0,      "Tag    "                   ;092 Day    
+    TCODE    .0,    .0,      "Jahr   "                   ;093 Year   
+    TCODE    .0,    .0,      "Einst."                    ;094 Set 
+    TCODE    .0,    .0,      "Gas# "                     ;095 Gas# 
     TCODE    .0,    .0,      "Ja"                        ;096 Yes
     TCODE    .0,    .0,      "Aktuell: "                 ;097 Current:
-    TCODE    .14,   .2,      "Einstellungs-Menï¿½:"        ;098 Setup Menu:
+    TCODE    .14,   .2,      "Einstellungs-Menü:"        ;098 Setup Menu:
     TCODE    .20,   .35,     "Custom FunktionenI"        ;099 Custom FunctionsI
     TCODE    .20,   .125,    "Dekomod.:"                 ;100 Decotype:
     TCODE    .85,   .125,    "ZH-L16 OC"                 ;101 ZH-L16 OC
-    TCODE    .85,   .125,    "Tiefenme."                 ;102 Gauge
+    TCODE    .85,   .125,    "Tiefenme."                 ;102 Gauge    
     TCODE    .85,   .125,    "Tiefenme."                 ;103 Gauge
     TCODE    .85,   .125,    "ZH-L16 CC"                 ;104 ZH-L16 CC
     TCODE    .0,    .0,      "Aktives Gas? "             ;105 Active Gas?
@@ -240,8 +240,8 @@
     TCODE    .20,   .95,     "Tiefe +/-:"		         ;107 Depth +/-:
     TCODE    .20,   .125,    "Wechsel:"			  		 ;108 Change:
     TCODE    .20,   .155,    "Standard:"                 ;109 Default:
-    TCODE    .20,   .65,     "CCR Setup Menï¿½"            ;110 CCR Setup Menu
-    TCODE    .28,   .2,      "CCR Setup Menï¿½"            ;111 CCR Setup Menu
+    TCODE    .20,   .65,     "CCR Setup Menü"            ;110 CCR Setup Menu
+    TCODE    .28,   .2,      "CCR Setup Menü"            ;111 CCR Setup Menu
     TCODE    .0,    .0,      "SP#"                       ;112 SP#
     TCODE    .20,   .95,     "Batterie Info"             ;113 Battery Info
     TCODE    .10,   .2,      "Batterie Information"      ;114 Battery Information
@@ -258,29 +258,29 @@
     TCODE    .100,  .75,     "He +"                      ;125 He +
     TCODE    .100,  .100,    "He -"                      ;126 He -
     TCODE    .100,  .0,      "Ende"                      ;127 Exit
-    TCODE    .100,  .25,     "Lï¿½schen"                   ;128 Delete
+    TCODE    .100,  .25,     "Löschen"                   ;128 Delete
     TCODE    .20,   .65,     "Debug:"                    ;129 Debug:
-    TCODE    .65,   .65,     "AN "                       ;130 ON
+    TCODE    .65,   .65,     "AN "                       ;130 ON 
     TCODE    .65,   .65,     "AUS"                       ;131 OFF
-    TCODE    .100,  .50,     "alle lï¿½schen"              ;132 Del. all
+    TCODE    .100,  .50,     "alle löschen"              ;132 Del. all
     TCODE    .10,   .0,      "Unerwarteter Reset im"     ;133 Unexpected reset from
     TCODE    .10,   .25,     "TG-Modus! Bitte melden"    ;134 Divemode! Please help
-    TCODE    .10,   .50,     "Sie die u.a. Debug "       ;135 and report the Debug
+    TCODE    .10,   .50,     "Sie die u.a. Debug "       ;135 and report the Debug 
     TCODE    .10,   .75,     "Informationen!"            ;136 Information below!
     TCODE    .100,  .0,      "Bailout"                   ;137 Bailout
-    TCODE    .85,   .125,    "Apnoe    "                 ;138 Apnoe
+    TCODE    .85,   .125,    "Apnoe    "                 ;138 Apnoe    
     TCODE    .105,  .120,    "Abstieg"                   ;139 Descent
     TCODE    .105,  .60,     "Oberfl."                   ;140 Surface
     TCODE    .65,   .2,      "Beenden?"                  ;141 Quit?
     TCODE    .20,   .155,    "Mehr"                      ;142 More
     TCODE    .42,   .72,     "Sicher?"                   ;143 Confirm:
- 	TCODE    .60,   .2,      "Menï¿½ 2:"                   ;144 Menu 2:
-    TCODE    .52,   .96,     "Zurï¿½ck"                    ;145 Cancel
+ 	TCODE    .60,   .2,      "Menü 2:"                   ;144 Menu 2:
+    TCODE    .52,   .96,     "Zurück"                    ;145 Cancel
     TCODE    .52,   .120,    "OK!"                       ;146 OK!
     TCODE    .20,   .35,     "Mehr"                      ;147 More
     TCODE    .0,    .0,      ":.........:"               ;148 :.........:
     TCODE    .0,    .8,      "ppO2"                      ;149 ppO2
-    TCODE    .2,    .39,     "bar "                      ;150 bar
+    TCODE    .2,    .39,     "bar "                      ;150 bar 
     TCODE    .108,  .216,    "Marker?"                   ;151 Marker?
     TCODE    .85,   .125,    "L16-GF OC"                 ;152 L16-GF OC
     TCODE    .20,   .65,     "Custom FunktionenII"       ;153 Custom FunctionsII
@@ -288,12 +288,12 @@
 ; 32 custom function descriptors II (FIXED LENGTH = 15 chars).
     TCODE    .40,   .35,     "GF Low      [%]"           ;154 GF Low      [%]
     TCODE    .40,   .35,     "GF High     [%]"           ;155 GF High     [%]
-    TCODE    .40,   .35,     "Farbe# Batterie"           ;156 Color# Battery
+    TCODE    .40,   .35,     "Farbe# Batterie"           ;156 Color# Battery 
     TCODE    .40,   .35,     "Farbe# Standard"           ;157 Color# Standard
     TCODE    .40,   .35,     "Farbe# Maske   "           ;158 Color# Divemask
     TCODE    .40,   .35,     "Farbe# Warnung "           ;159 Color# Warnings
-    TCODE    .40,   .35,     "Tauchmodus Sek."           ;160 Divemode secs.
-    TCODE    .40,   .35,     "Festen SP ï¿½nde."           ;161 Adjust fixed SP
+    TCODE    .40,   .35,     "Tauchmodus Sek."           ;160 Divemode secs. 
+    TCODE    .40,   .35,     "Festen SP ände."           ;161 Adjust fixed SP
     TCODE    .40,   .35,     "Warnung Ceiling"           ;162 Warn Ceiling
     TCODE    .40,   .35,     "unbenutzt      "           ;163 unused
     TCODE    .40,   .35,     "BesseresGasAnz "           ;164 Blink BetterGas	(Remainder in divemode to switch to a better decompression gas).
@@ -303,7 +303,7 @@
     TCODE    .40,   .35,     "ppO2 Warn [bar]"           ;168 ppO2 warn [bar]
     TCODE    .40,   .35,     "GescWarn[m/min]"           ;169 Vel.warn[m/min]
     TCODE    .40,   .35,     "ZeitVersatz/Tag"           ;170 Time offset/day
-    TCODE    .40,   .35,     "Hï¿½henmesser anz"           ;171 Show altimeter
+    TCODE    .40,   .35,     "Höhenmesser anz"           ;171 Show altimeter
     TCODE    .40,   .35,     "Log-Marker anz."           ;172 Show Log-Marker
     TCODE    .40,   .35,     "Stoppuhr anz.  "           ;173 Show Stopwatch
     TCODE    .40,   .35,     "Gewebegraph anz"           ;174 ShowTissueGraph
@@ -334,8 +334,8 @@
     TCODE    .40,   .35,     "Zeige GF in NZ "           ;195 Show GF in NDL	(If GF > CF08)
     TCODE    .40,   .35,     "Alt. GF Low [%]"           ;196 Alt. GF Low [%]
     TCODE    .40,   .35,     "Alt. GF High[%]"           ;197 Alt. GF High[%]
-    TCODE    .40,   .35,     "GF Wechsel mï¿½gl"           ;198 Allow GF change
-    TCODE    .40,   .35,     "S.Stop Lï¿½nge[s]"           ;199 S.StopLength[s] (CF70: Safety Stop Duration [s])
+    TCODE    .40,   .35,     "GF Wechsel mögl"           ;198 Allow GF change
+    TCODE    .40,   .35,     "S.Stop Länge[s]"           ;199 S.StopLength[s] (CF70: Safety Stop Duration [s])
     TCODE    .40,   .35,     "S.Stop Start[m]"           ;200 S.StopStart [m] (CF71: Safety Stop Start Depth [m])
     TCODE    .40,   .35,     "S.Stop Ende [m]"           ;201 S.StopEnd   [m] (CF72: Safety Stop End Depth [m])
     TCODE    .40,   .35,     "S.Stop Reset[m]"           ;202 S.StopReset [m] (CF73: Safety Stop Reset Depth [m])
@@ -365,7 +365,7 @@
     TCODE    .7,    .2,      "Custom Funktionen III"     ;225 Custom Functions III
     TCODE    .85,   .125,    "pSCR-GF  "                 ;226 pSCR-GF
 	TCODE    .90,   .54,     "Sicherheit"                ;227 SafetyStop
-    TCODE    .0,    .0,      "Anzahl TG: "			     ;228 Total Dives:
+    TCODE    .0,    .0,      "Anzahl TG: "			     ;228 Total Dives: 
     TCODE    .20,   .35,     "Diluent Setup"             ;229 Diluent Setup
     TCODE    .20,   .65,     "Setpoint Setup"            ;230 Setpoint Setup
     TCODE    .5,    .2,      "Dil. Setup - Gasliste" 	 ;231 Dil. Setup - Gaslist
@@ -373,7 +373,7 @@
     TCODE    .93,   .170,    "  Ceiling"                 ;233 Ceiling (9Chars, right alligned)
     TCODE    .20,   .95,     "SP Modus: "                ;234 SP Mode: (10 chars)
 
-    TCODE    .10,   .2,      "Dekomodell verï¿½ndert!"     ;235 Decomode changed!
+    TCODE    .10,   .2,      "Dekomodell verändert!"     ;235 Decomode changed!
     TCODE    .85,   .125,    "L16-GF CC"                 ;236 L16-GF CC
     TCODE    .2,    .12,     "Nicht gefunden"            ;237 Not found
     TCODE    .100,  .0,      "SetPoint"                  ;238 SetPoint
@@ -383,7 +383,7 @@
     TCODE    .100,  .0,      "Keine Deko"                ;242 No deco
     TCODE    .132,  .0,      "beta"                      ;243 beta
     TCODE    .100,  .100,    "frei"                      ;244 unuse
-    TCODE    .20,   .65,     "CF,Gas&Deko zurï¿½cks."      ;245 Reset CF,Gas & Deco
+    TCODE    .20,   .65,     "CF,Gas&Deko zurücks."      ;245 Reset CF,Gas & Deco
     TCODE    .58,   .145,    "Batt!"                     ;246 Batt!
     TCODE    .20,   .125,    "Simulator"                 ;247 Simulator
     TCODE    .30,   .2,      "OSTC Simulator"            ;248 OSTC Simulator
@@ -399,12 +399,12 @@
 ;
     TCODE    .0,    .0,      "x"                         ;256 x
     TCODE    .20,   .35,     "Datumsform.:"              ;257 Date format:
-    TCODE    .10,   .2,      "Einstellungs-Menï¿½ 2:"      ;258 Setup Menu 2:
+    TCODE    .10,   .2,      "Einstellungs-Menü 2:"      ;258 Setup Menu 2:
     TCODE    .105,  .35,     "MMDDYY"                    ;259 MMDDYY
     TCODE    .105,  .35,     "DDMMYY"                    ;260 DDMMYY
     TCODE    .105,  .35,     "YYMMDD"                    ;261 YYMMDD
-    TCODE    .1,    .1,      "OSTC "                     ;262 OSTC
-    TCODE    .65,   .168,    "Bail "                     ;263 Bail
+    TCODE    .1,    .1,      "OSTC "                     ;262 OSTC 
+    TCODE    .65,   .168,    "Bail "                     ;263 Bail 
     TCODE    .7,    .48,     "Luft  "                    ;264 Air
     TCODE    .115,  .135,    "Luft  "                    ;265 Air
 
@@ -415,11 +415,11 @@
     TCODE    .93,   .170,    "Dekogas"		             ;270 Decogas
 
 ; New CFs Warning
-    TCODE    .10,   .2,      "Neue CF hinzugefï¿½gt!"      ;271 New CF added!
+    TCODE    .10,   .2,      "Neue CF hinzugefügt!"      ;271 New CF added!
     TCODE    .0,    .35,     "Neue Custom Funktionen"    ;272 New CustomFunctions
-    TCODE    .0,    .65,     "wurden hinzugefï¿½gt!"       ;273 were added! Check
-    TCODE    .0,    .95,     "Prï¿½fe CF I - CF III"       ;274 CF I - CF III Menu
-    TCODE    .0,    .125,    "Menï¿½ fï¿½r Details!"         ;275 for Details!
+    TCODE    .0,    .65,     "wurden hinzugefügt!"       ;273 were added! Check
+    TCODE    .0,    .95,     "Prüfe CF I - CF III"       ;274 CF I - CF III Menu
+    TCODE    .0,    .125,    "Menü für Details!"         ;275 for Details!
     TCODE    .20,   .125,    "Salzgeh.: "                ;276 Salinity:
 ;
     TCODE    .20,   .95,     "Grundzeit:"                ;277 Bottom Time:
@@ -430,18 +430,18 @@
     TCODE    .107,   .170,   "D-Tiefe"                   ;281 Avr.Depth
     TCODE    .90,   .170,    "Leitgewebe"                ;282 Lead Tiss.
     TCODE    .100,   .170,   "Stoppuhr"                  ;283 Stopwatch
-    TCODE    .20,   .95,     "Logbuch zurï¿½cks."          ;284 Reset Logbook
+    TCODE    .20,   .95,     "Logbuch zurücks."          ;284 Reset Logbook
     TCODE    .20,   .125,    "OSTC neu starten"          ;285 Reboot OSTC
-    TCODE    .20,   .155,    "Dekodaten zurï¿½cks."        ;286 Reset Decodata
+    TCODE    .20,   .155,    "Dekodaten zurücks."        ;286 Reset Decodata
 ; Altimeter extension
-    TCODE    .20,   .155,    "Hï¿½henmesser"               ;287 Altimeter
-    TCODE    .18,   .1,      "Hï¿½henmesser einst."        ;288 Set Altimeter
-    TCODE    .20,   .35,     "Hï¿½he NN: "                 ;289 Sea ref:
+    TCODE    .20,   .155,    "Höhenmesser"               ;287 Altimeter
+    TCODE    .18,   .1,      "Höhenmesser einst."        ;288 Set Altimeter
+    TCODE    .20,   .35,     "Höhe NN: "                 ;289 Sea ref: 
     TCODE    .0,    .0,      "Aktiv:   "                 ;290 Enabled:
     TCODE    .20,   .95,     "Normal:  1013 mbar"        ;291 Default: 1013 mbar
     TCODE    .20,   .125,    "+1 mbar"                   ;292 +1 mbar
     TCODE    .20,   .155,    "-1 mbar"                   ;293 -1 mbar
-    TCODE    .85,   .185,    "Hï¿½he "                     ;294 Alt:
+    TCODE    .85,   .185,    "Höhe "                     ;294 Alt: 
 ;
 	TCODE    .20,   .95,     "Custom FunktionenIII"      ;295 Custom FunctionsIII
     TCODE    .50,    .2,     "Rohdaten:"                 ;296 Raw Data:
@@ -472,34 +472,34 @@
 
 ; ZH-L16 mode description
     TCODE    .0,    .35,     "Dekomodell: ZH-L16 OC"     ;314 Decotype: ZH-L16 OC
-    TCODE    .0,    .65,     "Fï¿½r das Tauchen mit"       ;315 For Open Circuit
+    TCODE    .0,    .65,     "Für das Tauchen mit"       ;315 For Open Circuit
     TCODE    .0,    .95,     "offenen Systemen. "        ;316 Divers. Supports 5
     TCODE    .0,    .125,    "Bis zu 5 Trimix Gase."     ;317 Trimix Gases.
-    TCODE    .0,    .155,    "Hierzu das Menï¿½ Gas-"      ;318 Configure your gas
+    TCODE    .0,    .155,    "Hierzu das Menü Gas-"      ;318 Configure your gas
     TCODE    .0,    .185,    "einstellung verwenden."    ;319 in Gassetup menu.
-    TCODE    .0,    .215,    "CF11 & CF12 prï¿½fen!"       ;320 Check CF11 & CF12 !
+    TCODE    .0,    .215,    "CF11 & CF12 prüfen!"       ;320 Check CF11 & CF12 !
 ; Gaugemode description
-    TCODE    .0,    .35,     "Dekomodell:Tiefenmesser"   ;321 Decotype: Gauge
+    TCODE    .0,    .35,     "Dekomodell:Tiefenmesser"   ;321 Decotype: Gauge    
     TCODE    .0,    .65,     "Die Tauchzeit wird in"     ;322 Divetime will be in
-    TCODE    .0,    .95,     "Minuten:Sekunden ange-"    ;323 Minutes:Seconds.
-    TCODE    .0,    .125,    "zeigt. Der OSTC2 be-"      ;324 OSTC2 will not
-    TCODE    .0,    .155,    "rechnet keine Daten fï¿½r"   ;325 compute Deco, NoFly
+    TCODE    .0,    .95,     "Minuten:Sekunden ange-"    ;323 Minutes:Seconds.   
+    TCODE    .0,    .125,    "zeigt. Der OSTC2 be-"      ;324 OSTC2 will not     
+    TCODE    .0,    .155,    "rechnet keine Daten für"   ;325 compute Deco, NoFly
     TCODE    .0,    .185,    "Deko, Flugverbots- oder"   ;326 time and Desat.
-    TCODE    .0,    .215,    "Entsï¿½ttigungszeiten!"      ;327 time at all!
+    TCODE    .0,    .215,    "Entsättigungszeiten!"      ;327 time at all!
 ; Const.ppO2 description
     TCODE    .0,    .35,     "Dekomodell: ZH-L16 CC"     ;328 Decotype: ZH-L16 CC
-    TCODE    .0,    .65,     "Fï¿½r geschlossene"  		 ;329 For Closed
+    TCODE    .0,    .65,     "Für geschlossene"  		 ;329 For Closed
     TCODE    .0,    .95,     "Kreislaufsysteme."         ;330 Circuit rebreathers
     TCODE    .0,    .125,    "Stelle die 3 Setpoints"    ;331 Configure the 3
-    TCODE    .0,    .155,    "im CCR Setpoint Menï¿½"      ;332 SetPoints in CCR -
+    TCODE    .0,    .155,    "im CCR Setpoint Menü"      ;332 SetPoints in CCR -
     TCODE    .0,    .185,    "ein. Bis zu 5 Bailout"     ;333 Setup menu. 5 bail-
-    TCODE    .0,    .215,    "Gase sind verfï¿½gbar."      ;334 outs are available.
+    TCODE    .0,    .215,    "Gase sind verfügbar."      ;334 outs are available.
 ; Apnoemode description
     TCODE    .0,    .35,     "Dekomodell: Apnoe    "     ;335 Decotype: Apnoe
     TCODE    .0,    .65,     "Der OSTC2 zeigt jeden"     ;336 OSTC2 will display
     TCODE    .0,    .95,     "Abstieg getrennt in"       ;337 each descent separ-
     TCODE    .0,    .125,    "Min:Sek an. Die Abtast-"   ;338 ately in Min:Sec.
-    TCODE    .0,    .155,    "rate wird temporï¿½r auf"    ;339 Will temporally set
+    TCODE    .0,    .155,    "rate wird temporär auf"    ;339 Will temporally set
     TCODE    .0,    .185,    "1 Sekunde eingestellt."    ;340 samplerate to 1 sec
     TCODE    .0,    .215,    "Keine Deko Berechnung"     ;341 No Deco calculation
 ; Multi GF OC mode description
@@ -507,24 +507,24 @@
     TCODE    .0,    .65,     "Berechnung der Deko"       ;343 Decompression cal-
     TCODE    .0,    .95,     "mittels der GF-Methode"    ;344 culations with the
     TCODE    .0,    .125,    "(GF_lo/GF_hi). "           ;345 GF-Method (GF_lo/GF
-    TCODE    .0,    .155,    "Prï¿½fe die CF32 & CF33"     ;346 _hi). Check CF32 &
-    TCODE    .0,    .185,    "Werte! Fï¿½r offene Sys-"    ;347 CF33! Open Circuit
+    TCODE    .0,    .155,    "Prüfe die CF32 & CF33"     ;346 _hi). Check CF32 &
+    TCODE    .0,    .185,    "Werte! Für offene Sys-"    ;347 CF33! Open Circuit
     TCODE    .0,    .215,    "teme mit Tiefenstopps."    ;348 with Deep Stops.
 ; Multi GF CC mode description
     TCODE    .0,    .35,     "Dekomodell: L16-GF CC"     ;349 Decotype: L16-GF CC
     TCODE    .0,    .65,     "Berechnung der Deko"       ;350 Decompression cal-
     TCODE    .0,    .95,     "mittels der GF-Methode"    ;351 culations with the
-    TCODE    .0,    .125,    "(GF_lo/GF_hi). Prï¿½fe"      ;352 GF-Method (GF_lo/GF
+    TCODE    .0,    .125,    "(GF_lo/GF_hi). Prüfe"      ;352 GF-Method (GF_lo/GF
     TCODE    .0,    .155,    "die CF32 & CF33 Werte!"    ;353 _hi). Check CF32 &
-    TCODE    .0,    .185,    "Fï¿½r geschlossene Sys-"     ;354 CF33!Closed Circuit
+    TCODE    .0,    .185,    "Für geschlossene Sys-"     ;354 CF33!Closed Circuit
     TCODE    .0,    .215,    "teme mit Tiefenstopps."    ;355 with Deep Stops.
 ; pSCR-GF mode description
     TCODE    .0,    .35,     "Dekomodell: pSCR-GF"     	;356 Decotype: pSCR-GF
-    TCODE    .0,    .65,     "Fï¿½r passive halb-"     	;357 For passive semi-
+    TCODE    .0,    .65,     "Für passive halb-"     	;357 For passive semi-
     TCODE    .0,    .95,     "geschlossene Kreisel."   	;358 closed rebreather.
-    TCODE    .0,    .125,    "Prï¿½fe CF32 & CF33"     	;359 Check CF32 & CF33
-    TCODE    .0,    .155,    "fï¿½r Gradienten Faktoren" 	;360 for gradient factors
-    TCODE    .0,    .185,    "und CF61-CF63 fï¿½r"     	;361 and CF61-CF63 for
+    TCODE    .0,    .125,    "Prüfe CF32 & CF33"     	;359 Check CF32 & CF33
+    TCODE    .0,    .155,    "für Gradienten Faktoren" 	;360 for gradient factors
+    TCODE    .0,    .185,    "und CF61-CF63 für"     	;361 and CF61-CF63 for
     TCODE    .0,    .215,    "pSCR Parameter."    		;362 pSCR features.
 ;
 ; Setpoint Mode

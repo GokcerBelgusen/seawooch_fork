@@ -128,7 +128,7 @@ DISP_color_code_gaslist:				; %O2 in "EEDATA"
 	mullw		d'100'					; ppo2_warning_high*100
 	movff		PRODL,sub_b+0
 	movff		PRODH,sub_b+1
-	call		sub16					;  sub_c = sub_a - sub_b
+	call		sub16					;  sub_c = sub_a - sub_b	
 	btfss		neg_flag
 	bra			DISP_color_code_gaslist1; too high -> Warning Color!
 	call		DISP_standard_color
@@ -140,7 +140,7 @@ DISP_color_code_gaslist1:
 
 DISP_color_code_ceiling:
 	GETCUSTOM8	d'40'			; =1: Warn at all?
-	movwf	lo
+	movwf	lo					
 	movlw	d'1'
 	cpfseq	lo					; =1?
 	bra		DISP_color_code_ceiling1	; No, Set to default color
@@ -154,7 +154,7 @@ DISP_color_code_ceiling:
 	movlw	LOW		d'100'
 	movwf	xB+0
 	clrf	xB+1						; Devide/100 -> xC+0 = Depth in m
-	call	div16x16					; xA/xB=xC with xA as remainder
+	call	div16x16					; xA/xB=xC with xA as remainder 	
 	movf	xC+0,W						; Depth in m
 	subwf	lo,W
 	btfsc	STATUS,C
@@ -285,7 +285,7 @@ ostc_debug1:
 	movwf 	POSTINC2
 	movf	debug_char+5,W
 	movwf 	POSTINC2
-
+	
 	STRCAT_PRINT " "
 	return
 
@@ -305,7 +305,7 @@ DISP_resetdebugger:
 	DISPLAYTEXT	.134
 	DISPLAYTEXT	.135
 	DISPLAYTEXT	.136				; Display Debug intro
-
+	
 	WIN_TOP		.100
 	WIN_LEFT	.10
 
@@ -329,48 +329,48 @@ DISP_resetdebugger:
 	movwf 	POSTINC2
 	STRCAT  ". "
 	movff	flag1,lo
-	output_8
+	output_8		
 	PUTC    ' '
 	movff	flag2,lo
-	output_8
+	output_8		
 	call	word_processor
 
 	WIN_TOP		.125
 
 	lfsr	FSR2,letter
 	movff	flag3,lo
-	output_8
+	output_8		
 	PUTC    ' '
 	movff	flag4,lo
-	output_8
+	output_8		
 	PUTC    ' '
 	movff	flag5,lo
-	output_8
+	output_8		
 	PUTC    ' '
 	movff	flag6,lo
-	output_8
+	output_8		
 	PUTC    ' '
 	movff	flag7,lo
-	output_8
+	output_8		
 	call	word_processor
 
 	WIN_TOP		.150
 
 	lfsr	FSR2,letter
 	movff	flag8,lo
-	output_8
+	output_8		
 	PUTC    ' '
 	movff	flag9,lo
-	output_8
+	output_8		
 	PUTC    ' '
 	movff	flag10,lo
-	output_8
+	output_8		
 	PUTC    ' '
 	movff	flag11,lo
-	output_8
+	output_8		
 	PUTC    ' '
 	movff	flag12,lo
-	output_8
+	output_8		
 	call	word_processor
 
 	call	wait_switches		; Waits until switches are released, resets flag if button stays pressed!
@@ -388,7 +388,7 @@ DISP_resetdebugger_loop:
 
 DISP_divemode_mask:					; Displays mask in Dive-Mode
 	call		DISP_divemask_color	; Set Color for Divemode mask
-#IFDEF CCR_CTRL
+#IFDEF CCR_CTRL     
     ; Different position of the Max depth.
 	btfss	FLAG_const_ppO2_mode
     bra     DISP_divemode_mask1
@@ -452,7 +452,7 @@ DISP_clear_GF:
 #ENDIF
 
 	; Clear Dekostop and Dekosum
-	rcall	DISP_clear_decoarea
+	rcall	DISP_clear_decoarea	
 	call	DISP_divemask_color	; Set Color for Divemode mask
 	DISPLAYTEXT		d'84'			; NoStop
 	call	DISP_standard_color
@@ -460,7 +460,7 @@ DISP_clear_GF:
 
 DISP_display_ndl:
 	GETCUSTOM8	d'66'				; Always show GF?
-	decfsz		WREG,F				; WREG=1?
+	decfsz		WREG,F				; WREG=1?	
 	bra		DISP_display_ndl2		; No
 	rcall	DISP_display_gf			; Show GF (If GF > CF08)
 
@@ -469,7 +469,7 @@ DISP_display_ndl2:
 	return							; Yes, return
 
 	ostc_debug	'z'		; Sends debug-information to screen if debugmode active
-
+	
 	WIN_TOP		.136
 	WIN_LEFT	.118
 	WIN_FONT 	FT_MEDIUM
@@ -487,7 +487,7 @@ DISP_display_deko_mask:
 	btfsc	menubit					; Divemode menu active?
 	return							; Yes, return
 
-    rcall	DISP_clear_decoarea
+    rcall	DISP_clear_decoarea	
     ; total deco time word
 	bcf			show_safety_stop	; Clear safety stop flag
     call		DISP_divemask_color	; Set Color for Divemode mask
@@ -545,15 +545,15 @@ DISP_display_deko3:
 #IFNDEF IMPERIAL
 	movff	char_O_first_deco_time,lo   ; length of first stop in m
 #ELSE
-DISP_display_deko4:
+DISP_display_deko4:	
 	movff	char_O_first_deco_time,lo   ; length of first stop in min
 #ENDIF
 	output_99
 	STRCAT_PRINT "'"
 	WIN_FONT 	FT_SMALL
-
+	
 	ostc_debug	'x'		; Sends debug-information to screen if debugmode active
-
+	
 	WIN_TOP		.136
 	WIN_LEFT	.140 - 6*7 - 4          ; let space for sign + 5 digits + '
 	WIN_FONT 	FT_MEDIUM
@@ -591,7 +591,7 @@ DISP_display_gf:
 	WIN_TOP		.145
 #ENDIF
 	WIN_LEFT	.0
-	call	DISP_display_clear_common_y1
+	call	DISP_display_clear_common_y1	
 #ENDIF
 	return
 
@@ -630,7 +630,7 @@ DISP_show_safety_stop2:
 	bra		DISP_show_safety_stop3			; Yes.
 
 	bsf		safety_stop_active				; Set flag
-
+ 
 	btfsc	menubit							; Divemode menu active?
 	bra		DISP_show_safety_stop3			; Yes, do not display now but countdown
 
@@ -855,20 +855,20 @@ DISP_display_velocity_graphical:
 	WIN_FRAME_COLOR   .20+.20, .90-.20, .65, .75	;
 	GETCUSTOM8		d'36'					; Divemode mask
 	WIN_FRAME_COLOR   .20+.30, .90-.30, .65, .75	;
-
-	GETCUSTOM8		d'47'					; color_warn_celocity_mmin
+	
+	GETCUSTOM8		d'47'					; color_warn_celocity_mmin	
 	movwf	xA+0
 	clrf	xA+1
 	movlw	.5
 	movwf	xB+0							; Threshold for color warning (5 color normal + 2 color warning)
 	clrf	xB+1
-	call	div16x16						;xA/xB=xC with xA as remainder
+	call	div16x16						;xA/xB=xC with xA as remainder 	
 	; xC+0 holds stepsize in m/min (e.g. =3 for 15m/min warning treshold)
 	movff	hi,xA+0							; Velocity in m/min
 	clrf	xA+1
 	movff	xC+0,xB+0						; Step size
 	clrf	xB+1
-	call	div16x16						;xA/xB=xC with xA as remainder
+	call	div16x16						;xA/xB=xC with xA as remainder 	
 	; xC+0 now holds amount of segments to show
 
 	movff	hi,divA+0	; Copy back for numeric output
@@ -939,7 +939,7 @@ DISP_display_velocity:
 	output_16_3
 	OUTPUTTEXTH d'384'              ; ft/min
 	bra     DISP_display_velocity3
-
+ 
 DISP_display_velocity2:
 #ENDIF
 	output_99
@@ -1351,7 +1351,7 @@ DISP_menu_cursor:
 	movlw	d'185'
 	dcfsnz	temp1,F
 	movlw	d'215'
-
+	
 	movff	WREG,win_top
 	STRCPY_PRINT "\xB7"
 	return
@@ -1360,7 +1360,7 @@ DISP_menu_mask:
     call	DISP_divemask_color
 	DISPLAYTEXT	.5			; Menu:
 	call	DISP_standard_color
-#IFDEF CCR_CTRL
+#IFDEF CCR_CTRL     
     ; Reorder Menu ittems
 	DISPLAYTEXT .110		; CCR Setup Menu
 	DISPLAYTEXT .6			; Logbook
@@ -1392,7 +1392,7 @@ DISP_menu_mask:
 	output_16
 	call	word_processor
 	call	DISP_standard_color
-	return
+	return	
 
 DISP_setup_menu_mask:
     call	DISP_divemask_color
@@ -1404,7 +1404,7 @@ DISP_setup_menu_mask:
 	DISPLAYTEXT .100		; Decotype:
 	DISPLAYTEXT	.142		; More...
 	DISPLAYTEXT .11			; Exit
-	return
+	return	
 
 DISP_ccr_setup_menu_mask:
     call	DISP_divemask_color
@@ -1416,7 +1416,7 @@ DISP_ccr_setup_menu_mask:
 	DISPLAYTEXT .229        ; Diluent Setup
 	DISPLAYTEXT	.230		; Setpoint Setup
     DISPLAYTEXT .234        ; SP Mode:
-#IFDEF CCR_CTRL
+#IFDEF CCR_CTRL	
 	DISPLAYTEXTH .389		; CCR Controller Setup
 #ENDIF
 	DISPLAYTEXT .11			; Exit
@@ -1428,12 +1428,12 @@ DISP_more_setup_menu_mask:
 	DISPLAYTEXTH	.258	; Setup Menu 2:
 	call	DISP_standard_color
 	DISPLAYTEXTH	.257	; Date format:
-	DISPLAYTEXT		.129	; Debug:
+	DISPLAYTEXT		.129	; Debug: 
 	DISPLAYTEXT		.187	; Show License
 	DISPLAYTEXTH 	.276	; Salinity:
 	DISPLAYTEXTH	.280 	; Brightness:
 	DISPLAYTEXT .11			; Exit
-	return
+	return	
 
 DISP_more_menu_mask:
     call	DISP_divemask_color
@@ -1474,7 +1474,7 @@ DISP_simulator_mask:
 	DISPLAYTEXTH	.279                ; Calculate Deco
 	DISPLAYTEXT     .11                 ; Exit
 	return
-
+	
 DISP_temp_surfmode:
 	ostc_debug	'e'
     SAFE_2BYTE_COPY    temperature, last_temperature
@@ -1501,11 +1501,11 @@ DISP_temp_surfmode:
 	GETCUSTOM8  d'41'				; Check CF#41 Conversion to imperial units
 	btfsc   WREG,0                          ; Enabled ?
 	bra DISP_temp_surfmode1                         ; NO
-	STRCAT_PRINT  "ï¿½F "
+	STRCAT_PRINT  "°F "
 	return
 DISP_temp_surfmode1:
 #ENDIF
-	STRCAT_PRINT  "ï¿½C "
+	STRCAT_PRINT  "°C "
 	return
 
 DISP_temp_divemode:
@@ -1533,7 +1533,7 @@ DISP_temp_divemode:
 	bsf		leftbind			; left orientated output
 	output_16dp	d'2'
 	bcf		leftbind
-    STRCAT "ï¿½ "
+    STRCAT "° "
     clrf    WREG				; Allow up to 5 chars to avoid
     movff   WREG,letter+5		; collision with sat graphs
     call    word_processor
@@ -1589,10 +1589,10 @@ DISP_active_gas_divemode:				; Displays current gas (e.g. 40/20) if a) He>0 or b
 	return
 #IFDEF BOTTOM
 ; Disable Active Gas display in Gauge mode
-	btfsc	gauge_mode
+	btfsc	gauge_mode					
 	return
 #ENDIF
-	WIN_INVERT	.0					; Init new Wordprocessor
+	WIN_INVERT	.0					; Init new Wordprocessor	
 	call	DISP_active_gas_divemode_show	; Show gas (Non-Inverted in all cases)
 
 	btfss	better_gas_available	;=1: A better gas is available and a gas change is advised in divemode
@@ -1610,9 +1610,9 @@ DISP_active_gas_divemode:				; Displays current gas (e.g. 40/20) if a) He>0 or b
 	return							; No, Done.
 	movlw	color_yellow			; Blink in yellow
     call	DISP_set_color
-	WIN_INVERT	.1					; Init new Wordprocessor
+	WIN_INVERT	.1					; Init new Wordprocessor	
 	call	DISP_active_gas_divemode_show1	; Show gas (Non-Inverted in all cases)
-	WIN_INVERT	.0					; Init new Wordprocessor
+	WIN_INVERT	.0					; Init new Wordprocessor	
 	call	DISP_standard_color
 	return							; Done.
 
@@ -1637,13 +1637,13 @@ DISP_active_gas_divemode_show1:
 	cpfsgt	lo
 	bra		DISP_active_gas_divemode2		; Check He
 	bra		DISP_active_gas_divemode3		; Skip He check, display gas
-
+	
 DISP_active_gas_divemode2:
 	tstfsz	hi							; He = 0 %
 	bra		DISP_active_gas_divemode3	; display gas
 
     call    DISP_warnings_color         ; O2 below treshold, He=0 : Bad stuff !
-    bra     DISP_active_gas_divemode4
+    bra     DISP_active_gas_divemode4	
 
 DISP_active_gas_divemode3:
 	movlw	d'21'
@@ -1651,7 +1651,7 @@ DISP_active_gas_divemode3:
 	bra		DISP_active_gas_divemode4 ; No!
 	tstfsz	hi				; Air? (He=0%)
 	bra		DISP_active_gas_divemode4 ; No!
-
+	
 							; Yes, display "Air" instead of 21/0
 	lfsr	FSR2,letter
 	OUTPUTTEXTH		d'264'			;"Air  "
@@ -1698,7 +1698,7 @@ DISP_grey_inactive_gas:
 	incf	lo,F				        ; 1-5
 
     read_int_eeprom		d'33'       	; Get First gas (1-5)
-    movf    EEDATA,W
+    movf    EEDATA,W            
     subwf   lo,W                        ; Compare with current
     bz      DISP_white_gas              ; First is always on.
 
@@ -1706,7 +1706,7 @@ DISP_grey_inactive_gas:
     addwf   lo,W
     movwf   EEADR                       ; address in EEPROM.
     call    read_eeprom                 ; Read depth
-    clrf    WREG
+    clrf    WREG                
     cpfsgt  EEDATA                      ; is depth > 0 ?
     bra     DISP_grey_gas
 
@@ -1719,7 +1719,7 @@ DISP_grey_inactive_gas1:
 	bnc		DISP_grey_gas               ; test carry
 
 DISP_white_gas:
-	GETCUSTOM8	d'35'		            ;movlw	color_white
+	GETCUSTOM8	d'35'		            ;movlw	color_white	
 	goto	DISP_set_color	            ; grey out inactive gases!
     ; return
 
@@ -1771,7 +1771,7 @@ DISP_bailoutlist:       ; Show the bailout list:
 ;-----------------------------------------------------------------------------
 ; Display Pre-Dive Screen
 
-DISP_pre_dive_screen:
+DISP_pre_dive_screen:			
 	; List active gases/Setpoints
 
 	btfsc	FLAG_const_ppO2_mode		; in ppO2 mode?
@@ -1793,7 +1793,7 @@ DISP_pre_dive_screen2_loop:
 	incf	hi,F				; Increase Gas
 	movlw	d'4'
 	addwf	wait_temp,F			; Increase eeprom address for gas list
-
+	
 	STRCPY  TXT_GAS1
 	movff	hi,lo			; copy gas number
 	output_8				; display gas number
@@ -1828,10 +1828,10 @@ DISP_pre_dive_screen2b:
 	movlw	d'5'                ; list all four (remaining) gases
 	cpfseq	hi                  ; All gases shown?
 	bra		DISP_pre_dive_screen2_loop	; No
-
+	
 	return						; No, return (OC mode)
 
-DISP_pre_dive_screen3:
+DISP_pre_dive_screen3:	
 	WIN_LEFT	.90
 	WIN_FONT	FT_SMALL
 	bsf		leftbind
@@ -1852,7 +1852,7 @@ DISP_pre_dive_screen3_loop:
 	addwf	waitms_temp,F		; Increase row
 	WIN_LEFT	.90
 	movff	waitms_temp,win_top ; Set Row
-
+	
 	STRCPY  TXT_SP2
 	movff	apnoe_mins,lo       ; copy gas number
 	output_8			        ; display gas number
@@ -1862,7 +1862,7 @@ DISP_pre_dive_screen3_loop:
 	movff	EEDATA,lo		    ; copy to lo
 	clrf	hi
 	output_16dp	d'3'		    ; outputs into Postinc2!
-	call	word_processor
+	call	word_processor	
 
 	movlw	d'3'		        ; list all three SP
 	cpfseq	apnoe_mins          ; All gases shown?
@@ -1877,21 +1877,21 @@ DISP_pre_dive_screen3_loop:
 	PUTC    '/'
 	movff	hi,lo
 	output_8				; He Ratio
-	call	word_processor
+	call	word_processor		
 
 	bcf		leftbind
 	return				; Return (CC Mode)
 
 DISP_active_gas_surfmode:				; Displays start gas/SP 1
 	ostc_debug	'q'		; Sends debug-information to screen if debugmode active
-
+		
 	btfsc	FLAG_apnoe_mode				; In Apnoe mode?
 	return								; Yes, return
 
 	btfsc	gauge_mode					; In Gauge mode?
 	return								; Yes, return
 
-	btfss	FLAG_const_ppO2_mode	; are we in const. ppO2 mode?
+	btfss	FLAG_const_ppO2_mode	; are we in const. ppO2 mode?	
 	bra		DISP_active_gas_surfmode2	; No, display gases
 
 ; In CC Mode
@@ -1985,7 +1985,7 @@ DISP_active_gas_surfmode7:
 
 	decf	active_gas,W				; Gas 0-4
 	mullw	d'4'
-	movf	PRODL,W
+	movf	PRODL,W			
 	addlw	d'7'						; = address for He ratio
 	movwf	EEADR
 	call	read_eeprom					; Read He ratio
@@ -1993,7 +1993,7 @@ DISP_active_gas_surfmode7:
 
 	decf	active_gas,W				; Gas 0-4
 	mullw	d'4'
-	movf	PRODL,W
+	movf	PRODL,W			
 	addlw	d'6'						; = address for O2 ratio
 	movwf	EEADR
 	call	read_eeprom					; Read O2 ratio
@@ -2021,7 +2021,7 @@ DISP_active_gas_surfmode7:
 	bra		DISP_active_gas_surfmode8 	; No!
 	tstfsz	hi							; Air? (He=0%)
 	bra		DISP_active_gas_surfmode8 	; No!
-
+	
 							; Yes, display "Air" instead of 21/0
 	DISPLAYTEXTH		d'265'		;"Air  ", y-scale=2
 	return								; Done.
@@ -2108,7 +2108,7 @@ DISP_confirmbox2:
 
 DISP_confirmbox_loop:
 	call		check_switches_logbook
-
+	
 	btfsc		menubit3					; SET/MENU?
 	bra			DISP_confirmbox_move_cursor; Move Cursor
 	btfsc		menubit2					; ENTER?
@@ -2246,7 +2246,7 @@ DISP_depth3:
 
     SAFE_2BYTE_COPY rel_pressure, lo
 	call	adjust_depth_with_salinity			; computes salinity setting into lo:hi [mbar]
-
+	
 	STRCPY  "."
 
 	movlw	HIGH	d'20'			; Display 0.0m if lower then 20cm
@@ -2307,7 +2307,7 @@ DISP_depth_full_units_only:			; Display only in full meters or feet
 	bcf		ignore_digit4
 	WIN_FONT 	FT_SMALL
 	return
-
+	
 #IFNDEF IMPERIAL
 depth_less_10mtr:
 #ELSE
@@ -2325,7 +2325,7 @@ DISP_clear_depth			; No, clear depth area and set flag
 #ENDIF
 	return
 
-DISP_desaturation_time:
+DISP_desaturation_time:	
 	movff		int_O_desaturation_time+0,lo
 	movff		int_O_desaturation_time+1,hi		; Copy
 	tstfsz		lo									; =0?
@@ -2333,7 +2333,7 @@ DISP_desaturation_time:
 	tstfsz		hi									; =0?
 	bra			DISP_desaturation_time2				; No!
 	return											; Do not display Desat
-
+	
 DISP_desaturation_time2:
 	ostc_debug	'h'
 	WIN_TOP		.150
@@ -2364,12 +2364,12 @@ DISP_desaturation_time2:
 	call	word_processor
 	return
 
-DISP_nofly_time:
+DISP_nofly_time:	
  	movf    nofly_time+0,W              ; Is nofly null ?
     iorwf   nofly_time+1,W
     bnz     DISP_nofly_time2            ; No...
 	return
-
+ 
 DISP_nofly_time2:
 	ostc_debug	'g'
 	WIN_TOP		.125
@@ -2531,6 +2531,7 @@ update_batt_voltage0:
 	WIN_LEFT	.1
 	WIN_FONT 	FT_SMALL
 	WIN_INVERT	.0					; Init new Wordprocessor
+
 	GETCUSTOM8	d'35'			; Standard output color
 	btfsc	cc_active
     movlw   color_orange        ; CC active
@@ -2545,7 +2546,7 @@ update_batt_voltage0:
 	output_8
 	bcf		leftbind
 	STRCAT_PRINT  "%"
-  call	DISP_standard_color
+	call	DISP_standard_color
 	return
 
 update_batt_voltage2:
@@ -2712,7 +2713,7 @@ update_date:
 	movff	month,convert_value_temp+0
 	movff	day,convert_value_temp+1
 	movff	year,convert_value_temp+2
-	call	DISP_convert_date		; converts into "DD/MM/YY" or "MM/DD/YY" or "YY/MM/DD" in postinc2
+	call	DISP_convert_date		; converts into "DD/MM/YY" or "MM/DD/YY" or "YY/MM/DD" in postinc2	
 	call	word_processor
 	return
 
@@ -2859,7 +2860,7 @@ DISP_divemins:
 	cpfseq	lo					; =1?
 	bra		DISP_divemins2		; No, minutes only
 	bra		DISP_divemins_gauge	; Yes, use Gauge routine
-
+	
 DISP_divemins2:
 	movff	divemins+0,lo
 	movff	divemins+1,hi
@@ -2929,7 +2930,7 @@ DISP_display_apnoe_descent:
 	call	word_processor
 	WIN_FONT	FT_SMALL
 	return
-
+	
 DISP_divemins_apnoe:
 
 DISP_divemins_gauge:
@@ -2983,7 +2984,7 @@ DISP_stopwatch_timer_2:
 
 	movff	lo,wait_temp
 	movff	hi,lo
-	clrf	hi
+	clrf	hi	
 
 	movlw	d'0'
 	bcf		leftbind
@@ -3074,7 +3075,7 @@ DISP_stopwatch_timer_5:
 	call	convert_time				; converts hi:lo in seconds to mins (hi) and secs (lo)
 	movff	lo,wait_temp
 	movff	hi,lo
-	clrf	hi
+	clrf	hi	
 	movlw	d'0'
 	bcf		leftbind
 	bsf		show_last3
@@ -3094,7 +3095,7 @@ DISP_stopwatch_timer_4:
 #ELSE
 	WIN_TOP		.150
 #ENDIF
-#IFNDEF	BOTTOM
+#IFNDEF	BOTTOM 
 	WIN_FONT	FT_MEDIUM
 #ELSE
 ;Show Resettable Average Depth with LARGE font
@@ -3172,7 +3173,7 @@ DISP_stopwatch_show_gauge2:
 ;	movff	avr_rel_pressure+0,lo
 ;	movff	avr_rel_pressure+1,hi
 ;	call	adjust_depth_with_salinity		; computes salinity setting into lo:hi [mbar]
-
+	
 	STRCPY  "."
 
 	movlw	d'4'
@@ -3249,13 +3250,13 @@ DISP_total_average_show3:
 ;=============================================================================
 ; Writes OSTC #Serial and Firmware version in surfacemode
 ;
-DISP_serial:
+DISP_serial:			
 	ostc_debug	'a'		; Sends debug-information to screen if debugmode active
 	WIN_TOP		.0
 	WIN_LEFT	.1
 	WIN_FONT 	FT_SMALL
 	WIN_INVERT	.0                      ; Init new Wordprocessor
-
+	
   ifdef __DEBUG
 	GETCUSTOM8	d'64'					; Write header in blue when
     call    DISP_set_color              ; compiled in DEBUG mode...
@@ -3316,7 +3317,7 @@ show_decotype_mainscreen8:
 #ENDIF
 
   ifdef __DEBUG
-    STRCAT_PRINT "-Dbg"
+    STRCAT_PRINT "-Dbg"    
   else
 	call	word_processor
 
@@ -3362,7 +3363,7 @@ DISP_divemode_menu_mask_first3:
 	call	customview_menu_entry3	; Show customview-dependent menu entry
 	DISPLAYTEXT	.241				;"Display"
 	DISPLAYTEXT	.34					;"Exit"
-	return
+	return							
 
 DISP_divemode_set_xgas:				; Displayes the "Set Gas" menu
 	WIN_LEFT	.100
@@ -3430,18 +3431,18 @@ DISP_divemode_simulator_mask2:
 DISP_decoplan_show_stop:
         ;---- Print depth ----------------------------------------------------
         WIN_LEFT .100
-
+        
         btfss   lo,7                    ; Bit set ?
         bra     DISP_decoplan_std_stop  ; No : Just an usual stop
 
         bcf     lo,7                    ; cleanup depth
-
+		
 		GETCUSTOM8	d'55'				; Load gas switch [min] in wreg
 		tstfsz	WREG					; =0?
 		bra		DISP_decoplan_show_stop1; No: Show gas switch stop
 		bra     DISP_decoplan_std_stop  ; Yes: Just an usual stop
-
-DISP_decoplan_show_stop1:
+		
+DISP_decoplan_show_stop1:		
         movlw   color_yellow
         call    DISP_set_color			; Show in yellow for gas switch
         bra     DISP_decoplan_nstd_stop
@@ -3449,7 +3450,7 @@ DISP_decoplan_show_stop1:
 DISP_decoplan_std_stop:
 	    call    DISP_standard_color
 
-DISP_decoplan_nstd_stop:
+DISP_decoplan_nstd_stop:        
 	    lfsr	FSR2,letter
 	    bsf     leftbind
 #IFDEF IMPERIAL
@@ -3475,7 +3476,7 @@ DISP_decoplan_nstd_stop3:
         ;---- Print duration -------------------------------------------------
 	    WIN_LEFT	.139
 	    lfsr	FSR2,letter
-
+	    
 	    movf    lo,W                    ; Swap hi & lo
 	    movff   hi,lo
 	    movwf   hi
@@ -3585,7 +3586,7 @@ DISP_decoplan_1:
         movf    decoplan_index,W
         addwf   PRODL,W
         movwf   decoplan_gindex         ; --> decoplan_gindex
-
+        
         bcf     last_ceiling_gf_shown   ; Not finished yet...
 
 DISP_decoplan_2:
@@ -3637,7 +3638,7 @@ DISP_decoplan_99:
         return
 ;-----------------------------------------------------------------------------
 ; Toggle gas activity flag during dive.
-;
+; 
 ; Input: gaslist_active
 ;        Gaslist from eeprom[2...]
 ;
@@ -3647,13 +3648,13 @@ DISP_decoplan_99:
 ;       should not be displayed as selected here...
 ;
 DISP_de_activelist:			; show (de)active gaslist
-	call	DISP_standard_color
+	call	DISP_standard_color	
     DISPLAYTEXT	.254			; Close
 
 	WIN_LEFT	.100
 	WIN_FONT	FT_SMALL
 	bsf		leftbind
-
+	
 	movlw	d'2'
 	movwf	wait_temp			; here: stores eeprom address for gas list
 	movlw	d'0'
@@ -3668,7 +3669,7 @@ DISP_de_activelist_loop:
 	addwf	waitms_temp,F		; Increase row
 	WIN_LEFT	.100
 	movff	waitms_temp,win_top ; Set Row
-
+	
   	lfsr	FSR2,letter
 	movff	wait_temp, EEADR; Gas #hi: %O2 - Set address in internal EEPROM
 	call	read_eeprom		; get byte (stored in EEDATA)
@@ -3688,11 +3689,11 @@ DISP_de_activelist_loop:
 	call	read_eeprom		; get byte (stored in EEDATA)
 	movff	EEDATA,lo		; copy to lo
 	output_8				; outputs into Postinc2!
-
+	
 	movf    lo,w            ; Gas with a zero depth
 	bz      DISP_de_activelist_grey ; should be displayed inactive.
-
-; Check if gas needs to be greyed-out (inactive)
+	
+; Check if gas needs to be greyed-out (inactive)	
 	movff	gaslist_active,EEDATA	; Get flag register
 	movff	hi,lo			; copy gas number
 DISP_de_activelist_loop1:
@@ -3706,14 +3707,14 @@ DISP_de_activelist_grey:    ; grey out inactive gases!
 	call	DISP_set_color
 
 DISP_de_activelist_white:
-	call	word_processor
-	call	DISP_standard_color
+	call	word_processor	
+	call	DISP_standard_color	
 
 	movlw	d'5'			; list all five gases
 	cpfseq	hi				; All gases shown?
 	bra		DISP_de_activelist_loop	; No
 
-	return					;  return
+	return					;  return 
 
 DISP_show_change_depth:		; Yes, show change depth for gas #menupos
 	btfsc	display_set_setpoint	; In Setpoint list?
@@ -3810,7 +3811,7 @@ DISP_diluent_list_loop:
 	decf	EEADR,F			; Dil #hi: %O2 - Set address in internal EEPROM
 	call	read_eeprom		; get byte (stored in EEDATA)
 	DISP_color_code		warn_gas_in_gaslist		; Color-code output	(%O2 in "EEDATA")
-
+    
 	call	word_processor
 	call	DISP_standard_color
 
@@ -3826,7 +3827,7 @@ DISP_gas_list:
 	WIN_LEFT	.100
 	WIN_FONT	FT_SMALL
 	bsf		leftbind
-
+	
 	movlw	d'2'
 	movwf	wait_temp			; here: stores eeprom address for gas list
 	movlw	d'231'
@@ -3861,15 +3862,15 @@ DISP_gas_list_loop:
 
 ; Check if the "better gas" should be highlighted
 
-	WIN_INVERT	.0					; Init new Wordprocessor
+	WIN_INVERT	.0					; Init new Wordprocessor	
 	movf	better_gas_number,W	; better gas 1-5?
 	cpfseq	hi					; compare with gas#
 	bra		DISP_gas_list_loop2	; No equal, skip
-
+	
 	movlw	color_yellow			; Blink in yellow
     call	DISP_set_color
-	WIN_INVERT	.1					; Init new Wordprocessor
-
+	WIN_INVERT	.1					; Init new Wordprocessor	
+	
 DISP_gas_list_loop2:
 ; Check if gas needs to be greyed-out (inactive)
 	movff	gaslist_active, EEDATA		; Work with sorted list
@@ -3881,9 +3882,9 @@ DISP_gas_list_loop1:
 
 	btfss	STATUS,C		; test carry
 	rcall	DISP_gas_list_grey
-
-	call	word_processor
-	call	DISP_standard_color
+		
+	call	word_processor	
+	call	DISP_standard_color	
 
 	movlw	d'5'			; list all five gases
 	cpfseq	hi				; All gases shown?
@@ -3898,7 +3899,7 @@ DISP_gas_list_grey:
 	call	DISP_set_color	; grey out inactive gases!
 	return
 
-DISP_splist_start:
+DISP_splist_start:	
 	WIN_LEFT	.100
 	WIN_FONT	FT_SMALL
 	bsf		leftbind
@@ -3919,7 +3920,7 @@ DISP_splist_loop:
 	addwf	waitms_temp,F		; Increase row
 	movff	waitms_temp,win_top ; Set Row
 	WIN_LEFT	.100
-
+	
 	STRCPY  TXT_SP2
 	movff	decoplan_index,lo	; copy gas number
 	output_8				; display gas number
@@ -3929,7 +3930,7 @@ DISP_splist_loop:
 	movff	EEDATA,lo		; copy to lo
 	clrf	hi
 	output_16dp	d'3'		; outputs into Postinc2!
-	call	word_processor
+	call	word_processor	
 
 	movlw	d'3'		; list all three SP
 	cpfseq	decoplan_index          ; All gases shown?
@@ -3994,17 +3995,17 @@ DISP_tissue_saturation_graph:
     ;---- Draw Frame ---------------------------------------------------------
     btfsc   divemode
     bra     DISP_tsg_1
-
+    
     WIN_FRAME_STD   .25, .120, .82, .159    ; Surfmode
     bra     DISP_tsg_2
-DISP_tsg_1:
+DISP_tsg_1:    
     WIN_FRAME_STD   .169, .239, .90, .159   ; Divemode
 DISP_tsg_2:
 
     ;---- Draw grid ----------------------------------------------------------
     btfss   divemode
     bra     DISP_no_graph_grid
-
+    
 	GETCUSTOM8	d'64'					;movlw	color_grey
     call	DISP_set_color
 
@@ -4029,7 +4030,7 @@ DISP_tsg_2:
     movff   WREG,win_leftx2
     call    DISP_box
 DISP_no_graph_grid:
-
+    
     ;---- Draw N2 Tissues ----------------------------------------------------
 	lfsr	FSR2, char_O_tissue_N2_saturation
 	movlw	d'16'
@@ -4071,7 +4072,7 @@ DISP_tissue_saturation_graph3:
 	movwf	temp1
 	movff   temp1,win_bargraph
 
-	call	DISP_box
+	call	DISP_box	
 
 	decfsz	wait_temp,F
 	bra		DISP_tissue_saturation_graph3
@@ -4106,7 +4107,7 @@ DISP_tissue_saturation_graph2:
 	movwf	temp1
 	movff   temp1,win_bargraph
 
-	call	DISP_box
+	call	DISP_box	
 
 	decfsz	wait_temp,F
 	bra		DISP_tissue_saturation_graph2
@@ -4130,7 +4131,7 @@ DISP_tissue_saturation_graph2:
     movlw   .239-.30                    ; divemode
     movff   WREG,win_top
 	STRCPY_PRINT  TXT_HE2
-
+	
     ;---- Draw scale and O2[16]% ---------------------------------------------
     btfsc   divemode
     return
@@ -4199,7 +4200,7 @@ DISP_new_cf_warning:
 
 DISP_const_ppO2_value:
 	ostc_debug	'j'		; Sends debug-information to screen if debugmode active
-
+	
 #IFDEF CCR_CTRL
     btfss   ext_ppO2_enable         ; Check for eCTRL mode
     bra     DISP_const_ppO2_value_3
@@ -4239,7 +4240,7 @@ DISP_const_ppO2_value_3:
 
 	lfsr	FSR2,letter
 	movff	char_I_const_ppO2,lo
-
+	
 	tstfsz	lo						; In Bailout mode (char_I_const_ppO2=0)?
 	bra		DISP_const_ppO2_value2	; No, display Setpoint
 
@@ -4256,7 +4257,7 @@ DISP_const_ppO2_value2:				; Display SetPoint
 	movlw		d'10'
 	movwf		xB+0
 	clrf		xB+1
-	;xA/xB=xC with xA as remainder
+	;xA/xB=xC with xA as remainder 	
 	call		div16x16				; xC+0=p_amb/10
 
 	; char_I_const_ppO2 > p_amb/10 -> Not physically possible! -> Display actual value!
@@ -4302,11 +4303,11 @@ DISP_const_ppO2_value1:
 	movlw		d'100'
 	movwf		xB+0
 	clrf		xB+1
-	call		div16x16				;xA/xB=xC with xA as remainder
+	call		div16x16				;xA/xB=xC with xA as remainder 	
 
 	movff		xC+0,char_I_const_ppO2	; No, Overwrite with actual value
 	movff		xC+1,hi					; For test if ppO2>2,55bar
-
+	
 	GETCUSTOM8	d'39'					; Adjust fixed SP?
 	dcfsnz		WREG,F
 	bra			DISP_const_ppO2_value1a	; Yes!
@@ -4316,7 +4317,7 @@ DISP_const_ppO2_value11:
 ; Setpoint in possible limits
 	movff		ppO2_setpoint_store,char_I_const_ppO2		; Restore Setpoint
 	clrf		hi
-
+	
 DISP_const_ppO2_value1a:
 	movff	char_I_const_ppO2,lo
 
@@ -4324,7 +4325,7 @@ DISP_const_ppO2_value1a:
 	mullw	.100
 	movff	PRODH,xC+1
 	movff	PRODL,xC+0				; For color code
-	DISP_color_code		warn_ppo2	; Color-code output (ppO2 stored in xC)
+	DISP_color_code		warn_ppo2	; Color-code output (ppO2 stored in xC)	
 
 	tstfsz	hi						; >2,55bar?
 	rcall	DISP_const_ppO2_too_hi	; Yes
@@ -4455,7 +4456,7 @@ DISP_show_end_ead_divemode3:
 	mullw       .100
 	movff       PRODH,xC+1
 	movff       PRODL,xC+0              ; For color code
-	DISP_color_code		warn_ppo2		; Color-code output (ppO2 stored in xC)
+	DISP_color_code		warn_ppo2		; Color-code output (ppO2 stored in xC)	
 
 	WIN_LEFT	.130
 	WIN_TOP		.168
@@ -4467,7 +4468,7 @@ DISP_show_end_ead_divemode3:
     STRCPY_PRINT "----"                 ; YES: mark overflow.
 	goto        DISP_standard_color     ; Back to white.
 
-DISP_show_end_ead_divemode_1:
+DISP_show_end_ead_divemode_1:    
 	lfsr		FSR2,letter
     clrf        hi
 	bsf		leftbind
@@ -4501,9 +4502,9 @@ DISP_show_@5:
 	output_8
 	bcf         leftbind
 	STRCAT_PRINT "': "
-
+    
 	WIN_LEFT    .97+7*5                 ; "@10':" is 5 chars long
-	call        DISP_standard_color
+	call        DISP_standard_color 
 	lfsr        FSR2,letter
 
 	movff       int_O_extra_ascenttime+0,lo
@@ -4532,7 +4533,7 @@ DISP_show_@5_wait:
 ;=============================================================================
 
 compute_pscr_ppo2:
-; (Pressure[mbar]*char_I_O2_ratio)-(100-char_I_O2_ratio)*CF61*CF62*10
+; (Pressure[mbar]*char_I_O2_ratio)-(100-char_I_O2_ratio)*CF61*CF62*10	
 	movff	char_I_O2_ratio,WREG
 	sublw	.100			; 100-char_I_O2_ratio -> WREG
 	mullw	.10				; (100-char_I_O2_ratio)*10 -> PROD:2
@@ -4597,7 +4598,7 @@ DISP_show_pSCR_ppO2:
 	movff	sub_c+1,xC+1
 	clrf	xC+2
 	clrf	xC+3			; For color coding
-	DISP_color_code		warn_ppo2		; Color-code output (ppO2 stored in xC)
+	DISP_color_code		warn_ppo2		; Color-code output (ppO2 stored in xC)	
 	WIN_LEFT	.130
 	WIN_TOP		.192
 	lfsr    FSR2,letter
@@ -4642,7 +4643,7 @@ DISP_show_cave_bailout:
 
     OUTPUTTEXTH .311                    ; "Cave Bail."
     call        word_processor
-
+    
 ;   WIN_TOP     .240 - 24               ; DO NOT display liter units, as this
 ;   WIN_LEFT    .160 - 7                ; can be Bars also...
 ;   STRCPY_PRINT "l"
@@ -4650,13 +4651,13 @@ DISP_show_cave_bailout:
 	WIN_FONT    FT_MEDIUM
     WIN_LEFT	.90
     WIN_TOP     .201                    ; 170 + 24 + 14/2 + 32 + 14/2 = 240.
-	call        DISP_standard_color
+	call        DISP_standard_color 
 	lfsr        FSR2,letter
-
+    
     ;---- Retrieve divetime in seconds (since last reset)
 	movff	    average_divesecs+0,xA+0
 	movff	    average_divesecs+1,xA+1
-
+	
 	;---- Multiply by SAC, and divide by 60 (SAC inliters per minutes)
     GETCUSTOM8	d'56'			        ; Get bottom SAC
     movwf       xB+0
@@ -4672,7 +4673,7 @@ DISP_show_cave_bailout:
     ;---- Multiply by average pressure [absolute, in bar]
     movff       xC+0,xA+0               ; Get result (in xC+0, noy xC+2 !) into xA
     movff       xC+1,xA+1
-
+    
     movf        avr_rel_pressure+0,W    ; Add surface pressure to get absolute pressure
     addwf       last_surfpressure_30min+0,W
     movwf       xB+0
@@ -4681,7 +4682,7 @@ DISP_show_cave_bailout:
     movwf       xB+1                    ; --> Into xB
 
 	call	    mult16x16               ; xC:4=xA:2*xB:2
-
+	
 	movlw       LOW(.1000)              ; Pressure was in milibar, so divide by 1000.
 	movwf       xB+0
 	movlw       HIGH(.1000)
@@ -4697,7 +4698,7 @@ DISP_show_cave_bailout:
     call        sub16                   ; Computes prediction - limit
     btfss       neg_flag                ; Negativ ?
     call        DISP_warnings_color     ; NO: go RED.
-
+    
     ;---- Then display...
 	movff       xC+0,lo
 	movff       xC+1,hi
@@ -4723,17 +4724,17 @@ DISP_show_leading_tissue_2:
 	bsf		leftbind
 	output_8
 	STRCAT  " ("
-
+	
 	movlw	d'16'
 	cpfslt	wait_temp
 	bra		DISP_show_leading_tissue_he
 	STRCAT  TXT_N2_2
 	bra		DISP_show_leading_tissue2
 
-DISP_show_leading_tissue_he:
+DISP_show_leading_tissue_he:	
     STRCAT  TXT_HE2
 
-DISP_show_leading_tissue2:
+DISP_show_leading_tissue2:	
 	WIN_LEFT	.95
 	WIN_TOP		.192
 	WIN_FONT	FT_SMALL
@@ -4750,7 +4751,7 @@ DISP_show_leading_tissue2:
 	WIN_FONT	FT_SMALL
 
 	lfsr	FSR2,letter
-	output_8
+	output_8	
 	STRCAT_PRINT  "% "
 	bcf		leftbind
 	return
@@ -4808,7 +4809,7 @@ DISP_topline_box_clear:			; Writes an empty box
 DISP_topline_box:				; Writes a filled box...
 	GETCUSTOM8		d'35'		; ... with the standard color
 DISP_topline_box2:
-    WIN_BOX_COLOR   .0, .26, .0, .159
+    WIN_BOX_COLOR   .0, .26, .0, .159	
 	call    DISP_standard_color	; Reset to standard color in case of unreadable color
 	return
 
@@ -4828,7 +4829,7 @@ DISP_display_cns:
 	WIN_LEFT	.0
 	WIN_FONT 	FT_SMALL
 	DISP_color_code		warn_cns		; Color-code CNS output
-
+	
 	STRCPY  TXT_CNS4
 	movff	char_O_CNS_fraction,lo
 	bsf		leftbind
@@ -4855,7 +4856,7 @@ DISP_display_cns_surface:
 	WIN_FONT 	FT_SMALL
 	WIN_INVERT	.0					; Init new Wordprocessor
 	DISP_color_code		warn_cns		; Color-code CNS output
-
+	
 	STRCPY  TXT_CNS4
 	movff	char_O_CNS_fraction,lo
 	bsf		leftbind
@@ -4905,7 +4906,7 @@ DISP_custom_text:
 	WIN_INVERT	.0					; Init new Wordprocessor
 	call		DISP_divemask_color	; Set Color for Divemode mask
 
-	lfsr	FSR2,letter
+	lfsr	FSR2,letter	
 	movlw	d'64'
 	movwf	lo
 	movlw	d'24'
@@ -4967,7 +4968,7 @@ DISP_simdata_screen2:
 	WIN_LEFT	.0
 	WIN_FONT	FT_SMALL
 	bsf		leftbind
-
+	
 	movlw	d'2'
 	movwf	wait_temp			; here: stores eeprom address for gas list
 	movlw	d'10'
@@ -4978,7 +4979,7 @@ DISP_simdata_screen2_loop:
 	incf	hi,F				; Increase Gas
 	movlw	d'4'
 	addwf	wait_temp,F			; Increase eeprom address for gas list
-
+	
 	STRCPY  TXT_GAS1
 	movff	hi,lo			; copy gas number
 	output_8				; display gas number
@@ -5006,7 +5007,7 @@ DISP_simdata_screen2_loop:
 	movff	hi,temp11					; save hi
 	clrf    hi							; clear hi
 	call    convert_meters_to_feet2		; converts meters to feet, don't check CF#61
-	output_16_3							; Print
+	output_16_3							; Print 
 	STRCAT	TXT_FOOT2
 	movff	temp11,hi					; restore hi
 	bra DISP_simdata_screen2_loop4
@@ -5027,7 +5028,7 @@ DISP_simdata_screen2_loop4:
 
 	bra		DISP_simdata_white	        ; Yes
 
-DISP_simdata_screen2_loop2:
+DISP_simdata_screen2_loop2:	
     ; Check if gas is inactive ?
 	read_int_eeprom d'27'	            ; read flag register
 	movff	hi,lo			            ; copy gas number
@@ -5050,7 +5051,7 @@ DISP_simdata_grey:
 DISP_simdata_white:
 	call	DISP_standard_color
 
-DISP_simdata_color_done:
+DISP_simdata_color_done:	
 	movlw	d'25'
 	addwf	waitms_temp,F		; Increase row
 	WIN_LEFT	.0
@@ -5063,10 +5064,10 @@ DISP_simdata_screen2b:
 	movlw	d'5'			; list all five gases
 	cpfseq	hi				; All gases shown?
 	bra		DISP_simdata_screen2_loop	; No
-
+	
 	return							; No, return (OC mode)
 
-DISP_simdata_screen3:
+DISP_simdata_screen3:	
 	WIN_LEFT	.0
 	WIN_FONT	FT_SMALL
 	bsf		leftbind
@@ -5086,7 +5087,7 @@ DISP_simdata_screen3_loop:
 	addwf	waitms_temp,F		; Increase row
 	WIN_LEFT	.0
 	movff	waitms_temp,win_top ; Set Row
-
+	
 	STRCPY  TXT_SP2
 	movff	decoplan_index,lo   ; copy gas number
 	output_8				; display gas number
@@ -5096,7 +5097,7 @@ DISP_simdata_screen3_loop:
 	movff	EEDATA,lo		; copy to lo
 	clrf	hi
 	output_16dp	d'3'		; outputs into Postinc2!
-	call	word_processor
+	call	word_processor	
 
 	movlw	d'3'		; list all three SP
 	cpfseq	decoplan_index		; All gases shown?
@@ -5111,7 +5112,7 @@ DISP_simdata_screen3_loop:
 	STRCAT  "/"
 	movff	hi,lo
 	output_8				; He Ratio
-	call	word_processor
+	call	word_processor		
 
 	bcf		leftbind
 	return				; Return (CC Mode)
@@ -5123,11 +5124,11 @@ adjust_depth_with_salinity:			; computes salinity setting into lo:hi [mbar]
 
 	read_int_eeprom	d'26'			; Read Salinity from EEPROM
 	movff	EEDATA, wait_temp		; salinity
-
+	
 	movlw	d'105'					; 105% ?
 	cpfslt	wait_temp				; Salinity higher limit
 	return							; Out of limit, do not adjust lo:hi
-
+	
 	movlw	d'99'					; 99% ?
 	cpfsgt	wait_temp				; Salinity lower limit
 	return							; Out of limit, do not adjust lo:hi
@@ -5138,17 +5139,17 @@ adjust_depth_with_salinity:			; computes salinity setting into lo:hi [mbar]
 	movlw	d'102'					; 0,98bar/10m
 	movwf	xB+0
 	clrf	xB+1
-
+	
 	call	mult16x16				;xA*xB=xC (lo:hi * 100)
-
+	
 	movff	wait_temp,xB+0			; Salinity
 	clrf	xB+1
-
+							
 	call	div32x16  				; xC:4 / xB:2 = xC+3:xC+2 with xC+1:xC+0 as remainder
 
 	movff	xC+0,lo
 	movff	xC+1,hi					; restore lo and hi with updated value
-
+	
 	return
 #IFDEF IMPERIAL
 convert_meters_to_feet:             ; convert value in lo:hi from meters to feet
@@ -5176,7 +5177,7 @@ convert_meters_to_feet2:
 	addwfc	xC+2,F
 	addwfc	xC+3,F
 
-	movlw	d'100'
+	movlw	d'100'					
 	movwf	xB+0
 	clrf	xB+1
 

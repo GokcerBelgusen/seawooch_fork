@@ -20,8 +20,8 @@
 ; written by: Matthias Heinrichs, info@heinrichsweikamp.com
 ; written: 060107
 ; last updated: 081026
-; known bugs:
-; ToDo:
+; known bugs: 
+; ToDo: 
 
 ;=============================================================================
 ; Temp data, local to this module, moved to ACCES0 area.
@@ -33,7 +33,7 @@
         logbook1_ptr:2          ; Loogbook pointer inside EEPROM Bank1
         logbook_cur_depth:2     ; Current depth, for drawing profile.
         logbook_cur_tp:2        ; Current temperature, for drawing profile.
-        logbook_last_tp         ; Y of the last item in Tpï¿½ curve.
+        logbook_last_tp         ; Y of the last item in Tp° curve.
         logbook_min_tp:2        ; Min temperature, for drawing profile.
         logbook_max_tp:2        ; Maximum temperature, for drawing profile.
         logbook_ceiling         ; Current ceiling, for drawing profile.
@@ -53,7 +53,7 @@ menu_logbook1:
 	bcf			all_dives_shown					; clear some flags
 	bcf			logbook_profile_view
 	bcf			logbook_page_not_empty
-	clrf		menupos3						; Here: used rows on current logbook-page
+	clrf		menupos3						; Here: used rows on current logbook-page	
 	clrf		menupos2						; Here: # of current displayed page
 	clrf		divenumber						; # of dive in list during search
 
@@ -74,7 +74,7 @@ menu_logbook1a_no_get_free:				; Without repeated search for dive
 	movlw		d'5'
 	movwf		menupos					; Here: stores current position on display (5-x)
 
-;-----------------------------------------------------------------------------
+;-----------------------------------------------------------------------------	
 ; search external EEPROM backwards from eeprom_address
 ; for 0xFA, 0xFA (store 1st. 0xFA position for next search)
 ; read header data and display it
@@ -112,7 +112,7 @@ menu_logbook2b:
 	movlw		0xFA                    ; That was a FA ?
 	cpfseq		SSPBUF
     bra         menu_logbook2           ; No: continue the fast loop...
-
+    
     ;---- Slow check : was it before or after that one ? ---------------------
 
  	incf_eeprom_address	d'1'			; Been one step too far ?
@@ -120,7 +120,7 @@ menu_logbook2b:
 	movlw		0xFA                    ; That was a FA ?
 	xorwf		SSPBUF,W
 	bz          menu_loop_tooFar        ; Got both of them...
-
+	
     infsnz      divemins+0,F            ; Advance to the next byte.
 	incf        divemins+1,F
 	decf_eeprom_address	d'2'			; One step back, two steps forward.
@@ -129,7 +129,7 @@ menu_logbook2b:
 	xorwf		SSPBUF,W
 	bz          test_FA_DONE
     bra         menu_logbook2           ; No: continue the fast loop...
-
+   
 menu_loop_tooFar;
  	decf_eeprom_address	d'1'			; So stays pointing at the second one.
 
@@ -149,7 +149,7 @@ menu_logbook3b:
 #ENDIF
 	bra			menu_logbook_display_loop2	; rcall of get_free_eeprom_location not required here (faster)
 
-menu_logbook_reset:
+menu_logbook_reset:	
 	movf		divenumber,W
 	btfsc		STATUS,Z					; Was there at least one dive?
 	bra			menu_logbook3b				; No, Nothing to do
@@ -169,7 +169,7 @@ menu_logbook4:
 	cpfseq		divenumber					; current divenumber
 	goto		next_logbook				; No match, continue search
 	bra			display_profile2			; Match: Show header and profile
-
+	
 
 menu_logbook_display_loop:
 	btfsc		all_dives_shown				; All dives displayed?
@@ -184,9 +184,9 @@ menu_logbook_display_loop:
 
 	movff		divenumber,mintemp+0			; store all registered required to rebuilt the current logbookpage after the detail/profile view
 	movff		eeprom_header_address+0,decodata+0	; several registers are used as temp registers here
-	movff		eeprom_header_address+1,decodata+1
-	movff		divemins+0,max_pressure+0
-	movff		divemins+1,max_pressure+1
+	movff		eeprom_header_address+1,decodata+1		
+	movff		divemins+0,max_pressure+0			
+	movff		divemins+1,max_pressure+1			
 
 	movlw		d'3'
 	addwf		decodata+0,F
@@ -224,7 +224,7 @@ menu_logbook_display_loop2:
 
 menu_logbook_loop:
 	call		check_switches_logbook
-
+	
 	btfsc		menubit3					; SET/MENU?
 	goto		next_logbook3				; adjust cursor or create new page
 
@@ -234,7 +234,7 @@ menu_logbook_loop:
 	btfsc		onesecupdate
 	call		menu_check_dive_and_timeout	; "Goto restart" or sets sleepmode flag
 
-	bcf			onesecupdate				; one second update
+	bcf			onesecupdate				; one second update 
 
 	btfsc		sleepmode					; Timeout?
 #IFDEF CCR_CTRL
@@ -267,8 +267,8 @@ display_profile:
 	bsf			return_from_profileview			; tweak search routine to exit after found
 
 	movf		menupos2,W						; Number of page
-	mullw		d'5'
-	movf		PRODL,W
+	mullw		d'5'				
+	movf		PRODL,W						
 	addwf		menupos,W						; page*5+menupos=
 	movwf		divesecs						; # of dive to search
 
@@ -296,7 +296,7 @@ display_profile2:
 
 	GETCUSTOM15	.28							; Logbook Offset -> lo, hi
 	tstfsz		lo							; lo=0?
-	bra			display_profile_offset1		; No, adjust offset
+	bra			display_profile_offset1		; No, adjust offset	
 	tstfsz		hi							; hi=0?
 	bra			display_profile_offset1		; No, adjust offset
 	bra			display_profile_offset2		; lo=0 and hi=0 -> skip Offset routine
@@ -316,9 +316,9 @@ display_profile_offset1:
 	bsf			leftbind
 	output_16dp	d'10'						; # of dive with offset
 	bra			display_profile_offset3		; Skip normal routine
-
+	
 display_profile_offset2:
-	movff		divesecs,lo				;
+	movff		divesecs,lo				; 
 	output_99x							; # of dive
 
 display_profile_offset3:
@@ -375,7 +375,7 @@ display_profile_offset3:
 	movff		PRODL,sub_a+0
 	movff		PRODH,sub_a+1
 	call		subU16					; sub_c = sub_a - sub_b (with UNSIGNED values)
-
+    
     bcf         premenu                 ; Clear temporary flag
 
     btfss       neg_flag
@@ -395,12 +395,12 @@ display_start_dive_normal:
 	; sub_c:2 holds entry time in minutes
 	movff		sub_c+0,lo
 	movff		sub_c+1,hi
-	call		convert_time			; converts hi:lo in minutes to hours (hi) and minutes (lo)
+	call		convert_time			; converts hi:lo in minutes to hours (hi) and minutes (lo)	
 	movff		lo,PRODL				; temp
 	movff		hi,lo
 	output_99x							; hour
 	PUTC		':'
-	movff		PRODL,lo
+	movff		PRODL,lo			
 	output_99x							; minute
 
     btfss       premenu                 ; premenu is still 1 if dive was during midnight...
@@ -412,16 +412,16 @@ display_start_dive_normal:
     PUTC        "1"
     bcf         premenu
 	bra			logbook_divetime_common		; Skip end-of-divetime
-
+	
 display_end_of_divetime:
 	PUTC		0x94						; "End of dive" icon
 	call		I2CREAD2					; hour
 	movff		SSPBUF,lo
-	output_99x
+	output_99x			
 	PUTC		':'
 	call		I2CREAD2					; Minute
 	movff		SSPBUF,lo
-	output_99x
+	output_99x			
 
 logbook_divetime_common:
     clrf        WREG
@@ -432,7 +432,7 @@ logbook_divetime_common:
 	WIN_LEFT	.05
 	lfsr		FSR2,letter
 	call		I2CREAD2				; read max depth
-	movff		SSPBUF,lo
+	movff		SSPBUF,lo				
 	call		I2CREAD2				; read max depth
 	movff		SSPBUF,hi
 	movff		lo,xA+0					; calculate y-scale for profile display
@@ -446,7 +446,7 @@ logbook_divetime_common:
 	incf		sim_pressure+0,F		; increase one, because there may be a remainder
 	movlw		d'0'
 	addwfc		sim_pressure+1,F
-
+	
 	movlw		LOW		d'164000'		; 164pixel*1000 height
 	movwf		xC+0
 	movlw		HIGH	(d'164000' & h'FFFF') ; 164pixel*1000 height
@@ -459,7 +459,7 @@ logbook_divetime_common:
 	movff		hi,xB+1					; Max. Depth in mbar
 	call		div32x16				; xC:4 / xB:2 = xC+3:xC+2 with xC+1:xC+0 as remainder
 
-	movff		xC+0,last_temperature+0	;
+	movff		xC+0,last_temperature+0	; 
 	movff		xC+1,last_temperature+1	; = Pixels/10m (For scale, draw any xx rows a scale-line)
 
 	movf		last_temperature+0,W
@@ -488,9 +488,9 @@ display_profile_offset5:
 #IFDEF IMPERIAL
 display_profile_offset6:
 #ENDIF
-	call		I2CREAD2				; divetime in minutes
+	call		I2CREAD2				; divetime in minutes	
 	movff		SSPBUF,lo
-	call		I2CREAD2
+	call		I2CREAD2	
 	movff		SSPBUF,hi				; divetime in minutes
 
 	movff		lo,xA+0					; calculate x-scale for profile display
@@ -552,7 +552,7 @@ display_profile_xscale:
 	movwf		xB+0
 	clrf		xB+1
 	call		div16x16				; xA/xB=xC
-	movff		xC+0,xA+0
+	movff		xC+0,xA+0	
 	movff		xC+1,xA+1
 	movf		samplesecs_value,W		; devide through sample interval!
 	movwf		xB+0
@@ -568,17 +568,17 @@ display_profile_xscale:
 	bsf			leftbind
 	output_99x							; divetime seconds
 	STRCAT_PRINT    " "
-
+	
 	WIN_LEFT    .05 + 7*.15
 	lfsr        FSR2,letter
 
-	call		I2CREAD2
+	call		I2CREAD2	
 	movff		SSPBUF,lo
-	call		I2CREAD2
+	call		I2CREAD2	
 	movff		SSPBUF,hi				; Read min. Temperature
-    movff       lo,logbook_min_tp+0     ; Backup min Tpï¿½ too.
+    movff       lo,logbook_min_tp+0     ; Backup min Tp° too.
 	movff       hi,logbook_min_tp+1
-	movlw       color_orange            ; Use same color as tpï¿½ curve
+	movlw       color_orange            ; Use same color as tp° curve
 	call        DISP_set_color
 
 #IFDEF IMPERIAL
@@ -594,17 +594,17 @@ display_profile_xscale:
 	GETCUSTOM8  d'41'				; Check CF#41 Conversion to imperial units
 	btfsc   WREG,0                      ; Enabled ?
 	bra			display_profile_temp_c	; NO
-	STRCAT_PRINT "ï¿½F"
+	STRCAT_PRINT "°F"
 	bra			display_profile_pressure
 
 display_profile_temp_c:
 #ENDIF
-	STRCAT_PRINT "ï¿½C"                   ; Display 2nd row of details
+	STRCAT_PRINT "°C"                   ; Display 2nd row of details
 #IFDEF IMPERIAL
 display_profile_pressure:
 #ENDIF
     call        DISP_standard_color     ; Back to normal
-
+    
 	WIN_TOP		.50
 	WIN_LEFT	.05
 	lfsr		FSR2,letter
@@ -621,9 +621,9 @@ display_profile_pressure:
 	PUTC        ' '
 
 	call		I2CREAD2				; read Desaturation time
-	movff		SSPBUF,lo
+	movff		SSPBUF,lo				
 	call		I2CREAD2				; read Desaturation time
-	movff		SSPBUF,hi
+	movff		SSPBUF,hi		
 	call		convert_time				; converts hi:lo in minutes to hours (hi) and minutes (lo)
 	bsf			leftbind
 	movf		lo,W
@@ -645,11 +645,11 @@ display_profile_pressure:
     rcall       profile_display_color       ; Back to normal profile color.
 	incf_eeprom_address	d'5'				; Skip 5 Bytes in EEPROM (faster) (Battery, firmware)
 
-	call		I2CREAD2					; Read Tpï¿½ divisor
+	call		I2CREAD2					; Read Tp° divisor
 	movf		SSPBUF,W
 	andlw       0x0F                        ; Clear extra bits.
 	movwf       divisor_temperature	        ; Store divisor
-	movwf       count_temperature           ; Store to tpï¿½ counter too.
+	movwf       count_temperature           ; Store to tp° counter too.
 
 	call		I2CREAD2					; Read divisor
 	movf        SSPBUF,W
@@ -675,7 +675,7 @@ display_profile_pressure:
 display_profile2d:
 	; Start Profile display
 ; Write 0m X-Line..
-	movlw		color_grey
+	movlw		color_grey	
 	call		DISP_set_color				; Make this configurable?
 
 	movlw		d'75'
@@ -683,7 +683,7 @@ display_profile2d:
 	movlw		d'5'
 	movff		WREG,win_leftx2				; Left border (0-159)
 	movlw		d'1'
-	movff		WREG,win_height
+	movff		WREG,win_height				
 	movlw		d'155'
 	movff		WREG,win_width				; Right border (0-159)
 display_profile2e:
@@ -701,7 +701,7 @@ display_profile2e:
 	bra			display_profile2e			; No, draw another line
 
 ; Write 0min Y-Line..
-	movlw		color_grey
+	movlw		color_grey	
 	call		DISP_set_color				; Make this configurable?
 
 	movlw		d'75'
@@ -709,13 +709,13 @@ display_profile2e:
 	movlw		d'4'
 	movff		WREG,win_leftx2				; Left border (0-159)
 	movlw		d'164'
-	movff		WREG,win_height
+	movff		WREG,win_height				
 	movlw		d'1'
 	movff		WREG,win_width				; "Window" Width
 	call		DISP_box					; Inputs:  win_top, win_leftx2, win_height, win_width, win_color1, win_color2
 
 ; Draw frame around profile
-	movlw		color_blue
+	movlw		color_blue	
 	WIN_FRAME_COLOR	.75, .239, .4, .159	;top, bottom, left, right with color in WREG
 
 	call		I2CREAD2					; skip 0xFB		(Header-end)
@@ -728,17 +728,17 @@ display_profile2e:
 	movwf		timeout_counter3			; here: used as colum x2 (Start at Colum 5)
 	movlw		d'75'						; Zero-m row
 	movwf		apnoe_mins					; here: used for fill between rows
-    movwf       logbook_last_tp             ; Initialise for Tpï¿½ curve too.
+    movwf       logbook_last_tp             ; Initialise for Tp° curve too.
 	incf		timeout_counter3,W			; Init Column
 
-    movlw       LOW(-.100)                  ; Initialize max tpï¿½ to -10.0 ï¿½C.
+    movlw       LOW(-.100)                  ; Initialize max tp° to -10.0 °C.
     movwf       logbook_max_tp+0
     movlw       HIGH 0xFFFF & (-.100)
     movwf       logbook_max_tp+1
-
-    setf        logbook_cur_tp+0            ; Initialize Tpï¿½, before the first recorded point.
+    
+    setf        logbook_cur_tp+0            ; Initialize Tp°, before the first recorded point.
     setf        logbook_cur_tp+1
-    clrf        logbook_last_tp             ; Also reset previous Y for Tpï¿½
+    clrf        logbook_last_tp             ; Also reset previous Y for Tp°
     clrf        logbook_ceiling             ; Ceiling = 0, correct value for no ceiling.
 
     INIT_PIXEL_WRITE timeout_counter3       ; pixel x2			(Also sets standard Color!)
@@ -746,7 +746,7 @@ display_profile2e:
 profile_display_loop:
 	movff		profile_temp+0,profile_temp2+0
 	movff		profile_temp+1,profile_temp2+1		; 16Bit x-scaler
-	incf		profile_temp2+1,F
+	incf		profile_temp2+1,F					
 	tstfsz		profile_temp2+0						; Must not be Zero
 	bra			profile_display_loop2				; Not Zero!
 	incf		profile_temp2+0,F					; Zero, Increase!
@@ -775,7 +775,7 @@ profile_display_loop2:
     btfss       neg_flag
     movlw       color_dark_red              ; Or dark red if ceiling overflown.
     call        DISP_set_color
-
+    
 	movff       PRODL,xA+0
 	movff       PRODH,xA+1
 	movff		sim_pressure+0,xB+0			; devide pressure in mbar/quant for row offsett
@@ -785,7 +785,7 @@ profile_display_loop2:
 	movlw		d'76'                       ; Starts right after the top blue line.
 	movff		WREG,win_top
 	movff		timeout_counter3,win_leftx2 ; Left border (0-159)
-	movff		xC+0,win_height
+	movff		xC+0,win_height				
 	call		half_vertical_line			; Inputs:  win_top, win_leftx2, win_height, win_color1, win_color2
 
 ; Horizontal bar: jaggy line, so don't keep it.
@@ -795,21 +795,21 @@ profile_display_loop2:
 
 profile_display_skip_deco:
 
-    ;---- Draw Tpï¿½ curve, if any ---------------------------------------------
+    ;---- Draw Tp° curve, if any ---------------------------------------------
     movf        divisor_temperature,W
     bz          profile_display_skip_temp
 
-	movf        logbook_cur_tp+0,W          ; Did we had already a valid Tpï¿½C record ?
+	movf        logbook_cur_tp+0,W          ; Did we had already a valid Tp°C record ?
 	andwf       logbook_cur_tp+1,W
 	incf        WREG
 	bz          profile_display_skip_temp   ; No: just skip drawing.
 
-    movlw       LOW((.153*.256)/.370)         ; fixed tpï¿½ scale: (-2 .. +35ï¿½C * scale256 )/153pix
+    movlw       LOW((.153*.256)/.370)         ; fixed tp° scale: (-2 .. +35°C * scale256 )/153pix
  	movwf		xB+0
     movlw       HIGH((.153*.256)/.370)
  	movwf		xB+1
 
-	movf        logbook_cur_tp+0,W          ; Current Tpï¿½ - (-2.0ï¿½C) == Tpï¿½ + 20.
+	movf        logbook_cur_tp+0,W          ; Current Tp° - (-2.0°C) == Tp° + 20.
 	addlw       LOW(.20)                    ; Low byte.
 	movwf       xA+0
     movf		logbook_cur_tp+1,W
@@ -836,7 +836,7 @@ profile_display_skip_deco:
     bz          profile_display_temp_1      ; No: skip the vertical line.
     movwf       xC+1
 	call		profile_display_fill		; In this column between this row (xC+0) and the last row (xC+1)
-profile_display_temp_1:
+profile_display_temp_1:	
     movff       xC+0,logbook_last_tp
 
     PIXEL_WRITE timeout_counter3,xC+0       ; Set col(0..159) x row (0..239), put a current color pixel.
@@ -851,7 +851,7 @@ profile_display_skip_temp:
 	call		div16x16					; xA/xB=xC
 	movlw		d'75'
 	addwf		xC+0,F						; add 75 pixel offset to result
-
+	
 	btfsc		STATUS,C                    ; Ignore potential profile errors
 	movff		apnoe_mins,xC+0
 
@@ -862,33 +862,33 @@ profile_display_skip_temp:
 	movff		xC+0,apnoe_mins				; Store last row for fill routine
     PIXEL_WRITE timeout_counter3,xC+0       ; Set col(0..159) x row (0..239), put a std color pixel.
 
-    	incf		timeout_counter3,F          ; Next column
-  ;---- Draw Marker square , if any ----------------------------------------
-  btfss       log_marker_found            ; Any marker to draw?
-  bra         profile_display_skip_marker ; No
+	incf		timeout_counter3,F          ; Next column
+    ;---- Draw Marker square , if any ----------------------------------------
+    btfss       log_marker_found            ; Any marker to draw?
+    bra         profile_display_skip_marker ; No
+ 
+    ; 2x2 square
+    incf        apnoe_mins,W
+    movff       WREG,win_top
+    movlw       .4
+    movff       WREG,win_height
+    movlw       .2
+    movff       WREG,win_width
+    decf        timeout_counter3,W
+    movff       WREG,win_leftx2
 
-  ; 2x2 square
-  incf        apnoe_mins,W
-  movff       WREG,win_top
-  movlw       .4
-  movff       WREG,win_height
-  movlw       .2
-  movff       WREG,win_width
-  decf        timeout_counter3,W
-  movff       WREG,win_leftx2
+    movlw       color_orange
+    call        DISP_set_color
+    call        DISP_box                    ; Draw 2x2 Box
+    bcf         log_marker_found            ; Clear flag
 
-  movlw       color_orange
-  call        DISP_set_color
-  call        DISP_box                    ; Draw 2x2 Box
-  bcf         log_marker_found            ; Clear flag
-
-  profile_display_skip_marker:
+profile_display_skip_marker:
 
     ;---- Draw CNS curve, if any ---------------------------------------------
     movf        divisor_cns,W
     bz          profile_display_skip_cns
     ;
-    ; TODO HERE
+    ; TODO HERE 
     ;
 profile_display_skip_cns:
 
@@ -896,12 +896,12 @@ profile_display_skip_cns:
     movf        divisor_gf,W
     bz          profile_display_skip_gf
     ;
-    ; TODO HERE
+    ; TODO HERE 
     ;
 profile_display_skip_gf:
 
     ;---- All curves done.
-
+    
 profile_display_skip_loop1:					; skips readings!
 	dcfsnz		profile_temp2+0,F
 	bra			profile_display_loop3		; check 16bit....
@@ -1087,7 +1087,7 @@ profileview_page2:
 	bcf			leftbind					; Clear flag
 
 	WIN_TOP		.50
-	lfsr		FSR2,letter
+	lfsr		FSR2,letter	
 	call		I2CREAD2					; Battery lo
 	movff		SSPBUF,lo
 	call		I2CREAD2					; Battery hi
@@ -1154,9 +1154,9 @@ logbook_skip_cns:
 ; Show all new 0x21 data
 ; Show average depth
 	WIN_TOP		.50
-	call		I2CREAD2					; Read average depth
+	call		I2CREAD2					; Read average depth 
 	movff		SSPBUF,lo
-	call		I2CREAD2					; Read average depth
+	call		I2CREAD2					; Read average depth 
 	movff		SSPBUF,hi
 	STRCPY      TXT_AVR4
 #IFDEF IMPERIAL
@@ -1173,7 +1173,7 @@ logbook_skip_cns:
 
 logbook_show_average_depth:
 #ENDIF
-	output_16dp	d'3'			; Average depth
+	output_16dp	d'3'			; Average depth 
 	STRCAT_PRINT TXT_METER1
 
 #IFDEF IMPERIAL
@@ -1191,7 +1191,7 @@ logbook_show_average_depth1:
 	cpfsgt	lo						; GF model used for this dive?
 	bra		logbook_show_sat				; No
 
-
+	
 ; Show GF settings
 	call		I2CREAD2					; Read GF_lo
 	movff		SSPBUF,lo
@@ -1206,7 +1206,7 @@ logbook_show_average_depth1:
 	bra			logbook_deco_model			; Skip Sat
 
 logbook_show_sat:
-	call		I2CREAD2					; Read Saturation x
+	call		I2CREAD2					; Read Saturation x 
 	movff		SSPBUF,hi
 	call		I2CREAD2					; Read Desaturation x
 	movff		SSPBUF,lo
@@ -1259,7 +1259,7 @@ display_profile3_loop:
 	btfsc		sleepmode					; Timeout?
 	bra			exit_profileview			; back to list
 	bra			display_profile3_loop		; wait for something to do
-
+	
 ;=============================================================================
 ; Draw a vertical line between xC+1 and xC+0, at current X position.
 ;
@@ -1273,7 +1273,7 @@ profile_display_fill:
 	bra		profile_display_fill2	; No!
 	return
 
-profile_display_fill2:
+profile_display_fill2:	
     ; Make sure to init X position.
     movf    timeout_counter3,W
     mullw   2
@@ -1286,7 +1286,7 @@ profile_display_fill2:
 	cpfsgt	xC+1				    ; apnoe_mins>xC+0?
 	bra		profile_display_fill_up	; Yes!
 
-profile_display_fill_down2:			; Loop
+profile_display_fill_down2:			; Loop	
 	decf		xC+1,F
 
     HALF_PIXEL_WRITE    xC+1        ; Updates just row (0..239)
@@ -1323,14 +1323,14 @@ profile_view_get_depth:
 	clrf		average_divesecs+0
 	clrf		average_divesecs+1					; clear counting registers for next line
 
-	movlw		color_grey
+	movlw		color_grey	
 	call		DISP_set_color						; Make this configurable?
 	movlw		d'76'
 	movff		WREG,win_top
 	incf		timeout_counter3,W	; draw one line to right to make sure it's the background of the profile
 	movff		WREG,win_leftx2		; Left border (0-159)
 	movlw		d'163'
-	movff		WREG,win_height
+	movff		WREG,win_height				
 	movlw		d'1'
 	movff		WREG,win_width				; "Window" Width
 	call		DISP_box					; Inputs:  win_top, win_leftx2, win_height, win_width, win_color1, win_color2
@@ -1360,22 +1360,22 @@ profile_view_get_depth_no_line:
 profile_view_get_depth_new1:
 	btfsc		event_occured				; Was there an event attached to this sample?
 	rcall		profile_view_get_depth_events	; Yes, get information about this event(s)
-
-    ;---- Read Tpï¿½, if any AND divisor reached AND bytes available -----------
-    movf        divisor_temperature,W       ; Is Tpï¿½ divisor null ?
-    bz          profile_view_get_depth_no_tp; Yes: no Tpï¿½ curve.
-    decf        count_temperature,F         ; Decrement tpï¿½ counter
+    
+    ;---- Read Tp°, if any AND divisor reached AND bytes available -----------
+    movf        divisor_temperature,W       ; Is Tp° divisor null ?
+    bz          profile_view_get_depth_no_tp; Yes: no Tp° curve.
+    decf        count_temperature,F         ; Decrement tp° counter
     bnz         profile_view_get_depth_no_tp; No temperature this time
-
-    call		I2CREAD2					; Tpï¿½ low
+    
+    call		I2CREAD2					; Tp° low
 	movff		SSPBUF,logbook_cur_tp+0
-    call		I2CREAD2					; Tpï¿½ high
+    call		I2CREAD2					; Tp° high
 	movff		SSPBUF,logbook_cur_tp+1
 	decf        timeout_counter2,F
 	decf        timeout_counter2,F
 	movff       divisor_temperature,count_temperature   ; Restart counter.
-
-    ; Compute Tpï¿½ max on the fly...
+    
+    ; Compute Tp° max on the fly...
     movff       logbook_cur_tp+0,sub_a+0    ; Compare cur_tp > max_tp ?
     movff       logbook_cur_tp+1,sub_a+1
     movff       logbook_max_tp+0,sub_b+0
@@ -1383,17 +1383,17 @@ profile_view_get_depth_new1:
     call        sub16                       ; SIGNED sub_a - sub_b
     btfsc       neg_flag
     bra         profile_view_get_depth_no_tp
-
+    
     movff       logbook_cur_tp+0,logbook_max_tp+0
     movff       logbook_cur_tp+1,logbook_max_tp+1
-
+    
     ;---- Read deco, if any AND divisor=0 AND bytes available ----------------
 profile_view_get_depth_no_tp:
     movf        divisor_deco,W
     bz          profile_view_get_depth_no_deco
     decf        count_deco,F
     bnz         profile_view_get_depth_no_deco
-
+    
     call		I2CREAD2
 	movff		SSPBUF,logbook_ceiling
 	decf        timeout_counter2,F
@@ -1403,11 +1403,11 @@ profile_view_get_depth_no_tp:
 
     ;---- Read GF, if any AND divisor=0 AND bytes available ------------------
 profile_view_get_depth_no_deco:
-
+    
     movf        timeout_counter2,W          ; No more extra bytes ?
     btfsc       STATUS,Z
     return                                  ; No: done.
-
+    
     ; Then skip remaining bytes...
 	movf		timeout_counter2,W			; number of additional bytes to ignore (0-127)
 	call		incf_eeprom_address0		; increases bytes in eeprom_address:2 with 0x8000 bank switching
@@ -1480,7 +1480,7 @@ exit_profileview:
 	bcf			sleepmode
 	clrf		timeout_counter2				; restore all registers to build same page again
 	movff		decodata+0,eeprom_address+0
-	movff		decodata+1,eeprom_address+1
+	movff		decodata+1,eeprom_address+1		
 	movff		max_pressure+0,divemins+0
 	movff		max_pressure+1,divemins+1
 	movff		mintemp+0, divenumber
@@ -1496,19 +1496,19 @@ next_logbook2:
 	btfsc		all_dives_shown				; all shown
 	goto		menu_logbook1				; all reset
 
-	clrf		menupos3
+	clrf		menupos3	
 	movlw		d'5'
-	movwf		menupos					;
+	movwf		menupos					; 
 	incf		menupos2,F					; start new screen
 	call		DISP_ClearScreen
-
+	
 next_logbook:
 	movff		eeprom_header_address+0,eeprom_address+0
 	movff		eeprom_header_address+1,eeprom_address+1	; continue search here
 	goto		menu_logbook1b
 
 check_switches_logbook:
-	btfsc		switch_right
+	btfsc		switch_right			
 	bsf			menubit3
 	btfsc		switch_left
 	bsf			menubit2					; Enter
@@ -1526,7 +1526,7 @@ next_logbook3:
 	bra			next_logbook2				; yes, new page please
 
 next_logbook3a:
-	incf		menupos3,W					;
+	incf		menupos3,W					; 
 	cpfseq		menupos
 	bra			next_logbook3b
 	movlw		d'6'
@@ -1542,7 +1542,7 @@ next_logbook3b:
 
 display_listdive:
 	bsf			logbook_page_not_empty		; Page not empty
-	incf		menupos3,F
+	incf		menupos3,F					
 
 	btfsc		logbook_header_drawn		; "Logbook already displayed?
 	bra			display_listdive1a
@@ -1551,10 +1551,10 @@ display_listdive:
 	DISPLAYTEXT	.26							; "Logbook"
     call        DISP_standard_color
 	bsf			logbook_header_drawn
-
-display_listdive1a:
+	
+display_listdive1a:	
 	WIN_LEFT	.20
-
+	
 	movf		menupos2,W
 	mullw		d'5'
 	movf		PRODL,W
@@ -1645,7 +1645,7 @@ logbook_convert_64k:						; Converts <1.91 logbook (32kB) to 64kB variant
 	movlw	d'1'
 	movwf	EEADRH
 	movlw	0xAA
-	movwf	EEDATA
+	movwf	EEDATA		
 	call	write_eeprom			; write 0xAA to indicate the logbook is already converted
 	clrf	EEADRH					; Restore EEADRH
 ; convert logbook:
@@ -1658,10 +1658,10 @@ logbook_convert_64k:						; Converts <1.91 logbook (32kB) to 64kB variant
 	;logbook1_ptr+0 and logbook1_ptr+1 hold address in bank1
 	;logbook0_ptr+0 and logbook0_ptr+1 hold address in bank0
 	movlw	HIGH	0x8000
-	movwf	logbook1_ptr+1
+	movwf	logbook1_ptr+1 
 	movlw	LOW		0x8000
 	movwf	logbook1_ptr+0			    ; load address for bank1
-	movff	eeprom_address+0,logbook0_ptr+0
+	movff	eeprom_address+0,logbook0_ptr+0 
 	movff	eeprom_address+1,logbook0_ptr+1	; load address for bank0
 	movlw	0x80
 	movwf	uart2_temp
@@ -1685,7 +1685,7 @@ logbook_convert3:
 	addwf	logbook1_ptr+0,F
 	movlw	d'0'
 	addwfc	logbook1_ptr+1,F            ; increase target address
-	decfsz	uart1_temp,F
+	decfsz	uart1_temp,F	
 	bra		logbook_convert3
 	btg		LED_blue
 	decfsz	uart2_temp,F			    ; 32kByte done?
@@ -1694,11 +1694,11 @@ logbook_convert3:
 	bcf		LED_blue
 ; Do Step 2:
 	movlw	HIGH	0x0000
-	movwf	logbook1_ptr+1
+	movwf	logbook1_ptr+1 
 	movlw	LOW		0x0000
 	movwf	logbook1_ptr+0              ; load address for bank0
 	movlw	HIGH	0x8000
-	movwf	logbook0_ptr+1
+	movwf	logbook0_ptr+1 
 	movlw	LOW		0x8000
 	movwf	logbook0_ptr+0		        ; load address for bank1
 	movlw	0x80
@@ -1711,7 +1711,7 @@ logbook_convert5:
 	movff	logbook0_ptr+1,eeprom_address+1
 	call	I2CREAD
 	movff	SSPBUF,lo				; hold read value
-	incf_eeprom_address	d'1'
+	incf_eeprom_address	d'1'	
 	movff	eeprom_address+0,logbook0_ptr+0
 	movff	eeprom_address+1,logbook0_ptr+1    ; write source address
 	; write target
@@ -1722,7 +1722,7 @@ logbook_convert5:
 	incf_eeprom_address	d'1'
 	movff	eeprom_address+0,logbook1_ptr+0
 	movff	eeprom_address+1,logbook1_ptr+1; write target address
-	decfsz	uart1_temp,F
+	decfsz	uart1_temp,F	
 	bra		logbook_convert5
 	btg		LED_red
 	decfsz	uart2_temp,F			    ; 32kByte done?
@@ -1731,7 +1731,7 @@ logbook_convert5:
 	bcf		LED_red
 ; Do Step 3:
 	movlw	HIGH	0x8000
-	movwf	logbook0_ptr+1
+	movwf	logbook0_ptr+1 
 	movlw	LOW		0x8000
 	movwf	logbook0_ptr+0              ; load address for bank1
 	movlw	0x80
@@ -1747,7 +1747,7 @@ logbook_convert7:
 	incf_eeprom_address	d'1'
 	movff	eeprom_address+0,logbook0_ptr+0
 	movff	eeprom_address+1,logbook0_ptr+1	; write target address
-	decfsz	uart1_temp,F
+	decfsz	uart1_temp,F	
 	bra		logbook_convert7
 	btg		LED_red
 	btg		LED_blue
