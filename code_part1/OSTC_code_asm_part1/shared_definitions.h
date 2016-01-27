@@ -124,11 +124,8 @@ TAB_UCHAR (char_O_tissue_He_saturation, NUM_COMP); // Helium compartiment desatu
 
 TAB_UINT (int_O_gas_volumes, 5);            // Volumes evaluation for each gas tank, in 0.1 liters.
 VAR_UINT (int_O_ceiling);                   // in mbar
-
-#ifdef V_CEILING
-  #define V_CEILING_ENABLED true
 VAR_UINT (int_O_v_ceiling);                   // in mbar
-#endif
+VAR_UINT (char_O_v_ceiling_calaulated);
 
 TAB_UCHAR (char_O_hash, 16);
 
