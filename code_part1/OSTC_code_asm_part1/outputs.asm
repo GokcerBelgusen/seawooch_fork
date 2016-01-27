@@ -4384,7 +4384,7 @@ DISP_show_ceiling_1b:
 DISP_show_v_ceiling:
     call		DISP_divemask_color ; Set Color for Divemode mask
 	WIN_FONT	FT_SMALL
-    DISPLAYTEXT	d'370'              ; V.Ceiling
+    DISPLAYTEXTH	d'370'              ; V.Ceiling
 DISP_show_v_ceiling_1:
     call	DISP_standard_color
     WIN_FONT	FT_MEDIUM
