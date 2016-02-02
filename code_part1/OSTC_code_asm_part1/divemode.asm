@@ -2033,6 +2033,7 @@ set_powersafe_01:
 	bra		set_powersafe1
 set_powersafe_02:
 #ENDIF
+	bra		set_powersafe1
 	return
 
 set_powersafe1:
