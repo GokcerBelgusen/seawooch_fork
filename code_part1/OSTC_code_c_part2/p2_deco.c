@@ -1021,7 +1021,7 @@ static void clear_tissue(void)
     calc_lead_tissue_limit = 0.0;
     char_O_gtissue_no = 0;
     v_ceiling = 0;
-    char_O_v_ceiling = 0;
+    int_O_v_ceiling = 0;
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -1067,7 +1067,7 @@ static void calc_hauptroutine(void)
         char_O_nullzeit = 0;        // Reset bottom time.
         char_O_deco_status = 0;     // Calc bottom-time/nullzeit next iteration.
         v_ceiling = 0;
-        char_O_v_ceiling = 0;
+        int_O_v_ceiling = 0;
 
         // Values that should be reset just once for the full real dive.
         // This is used to record the lowest stop for the whole dive,
@@ -1301,7 +1301,7 @@ Surface:
                     calc_ascenttime();
                     char_O_deco_status = 0;         // calc nullzeit next time.
                     char_O_deco_last_stop = 0;      // Surface reached (to animate menu)
-                    char_O_v_ceiling = 0;
+                    int_O_v_ceiling = 0;
                     v_ceiling = 0;
                         return;
                 }
