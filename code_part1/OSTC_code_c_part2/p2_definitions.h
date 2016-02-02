@@ -97,7 +97,6 @@ extern void deco_push_tissues_to_vault(void);
 extern void deco_pull_tissues_from_vault(void);
 extern void deco_calc_CNS_planning(void);
 extern void deco_gas_volumes(void);
-extern void calc_v_ceiling(void);
 
 // ***********************************************
 // **         Allow compile on VisualC          **

@@ -228,7 +228,7 @@ float	                sim_lead_tissue_limit;      // Buhlmann tolerated pressure
 
 // Real context: what we are doing now.
 static float			calc_lead_tissue_limit;     //
-static float      v_ceiling;
+static unsigned char      v_ceiling;
 static float      target_GF;
 
 //---- Bank 6 parameters -----------------------------------------------------
@@ -563,6 +563,7 @@ static unsigned char calc_nextdecodepth(void)
         sim_limit( GF_low );
         p = sim_lead_tissue_limit - pres_surface;
         p *= BAR_TO_METER;
+
         if( p <= 0.0f )
             goto no_deco_stop;          // We can surface directly...
 
@@ -631,6 +632,11 @@ deco_stop_found:
         // next stop is the last validated depth found, aka first_stop
         need_stop = 1;                  // Hit.
         temp_depth_limit = first_stop;  // Stop depth, in meter.
+        if(v_ceiling == 0){
+          int_O_v_ceiling = (sim_lead_tissue_limit-pres_surface)*BAR_TO_METER*100;
+          v_ceiling = 1;
+        } 
+
 
 done:
         ;
@@ -1014,6 +1020,8 @@ static void clear_tissue(void)
 
     calc_lead_tissue_limit = 0.0;
     char_O_gtissue_no = 0;
+    v_ceiling = 0;
+    char_O_v_ceiling = 0;
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -1045,7 +1053,6 @@ static void calc_hauptroutine(void)
 
     calc_hauptroutine_update_tissues();
     calc_gradient_factor();
-    calc_v_ceiling();
 
     // toggle between calculation for nullzeit (bottom time),
     //                deco stops
@@ -1059,6 +1066,8 @@ static void calc_hauptroutine(void)
         int_O_extra_ascenttime = 0;
         char_O_nullzeit = 0;        // Reset bottom time.
         char_O_deco_status = 0;     // Calc bottom-time/nullzeit next iteration.
+        v_ceiling = 0;
+        char_O_v_ceiling = 0;
 
         // Values that should be reset just once for the full real dive.
         // This is used to record the lowest stop for the whole dive,
@@ -1101,6 +1110,7 @@ static void calc_hauptroutine(void)
         backup_gas_depth = sim_gas_last_depth;  // And save for later simu steps.
 
         sim_ascent_to_first_stop();
+
 
         // Calc stops next time (deco or gas switch).
         char_O_deco_status = 1 | ( char_O_deco_status & 4 );
@@ -1247,48 +1257,6 @@ void calc_hauptroutine_update_tissues(void)
     int_O_gtissue_press = (short)((pres_tissue_N2[char_O_gtissue_no] + pres_tissue_He[char_O_gtissue_no]) * 1000);
 }
 
-void calc_v_ceiling(void)
-{
-    int_O_v_ceiling = 0;
-    v_ceiling = 0;
-    target_GF = GF_low;
-
-    for(ci=0; ci<NUM_COMP;ci++)
-    {
-        overlay float N2 = pres_tissue_N2[ci];
-        overlay float He = pres_tissue_He[ci];
-        overlay float p = N2 + He;
-
-        read_buhlmann_coefficients();
-        var_N2_a = (var_N2_a * N2 + var_He_a * He) / p;
-        var_N2_b = (var_N2_b * N2 + var_He_b * He) / p;
-        target_GF =  GF_high - char_O_first_deco_depth * locked_GF_step;
-
-        if( char_I_deco_model != 0 )
-            p = ( p - var_N2_a * target_GF)
-              / (target_GF / var_N2_b + 1.0 - target_GF);
-
-        else
-            p = (p - var_N2_a) * var_N2_b;
-        if( p < 0.0 ) p = 0.0;
-
-        if( p > v_ceiling )
-        {
-            v_ceiling = p;
-        }
-    }
-
-
-    assert( 0.0 <= v_ceiling && v_ceiling <= 14.0);
-
-
-    if ((v_ceiling-pres_surface)>0)
-        int_O_v_ceiling = (short)((v_ceiling-pres_surface)*1000);
-    else
-        int_O_v_ceiling = 0;
-}
-
-
 //////////////////////////////////////////////////////////////////////////////
 // Compute stops.
 //
@@ -1308,7 +1276,7 @@ void calc_hauptroutine_calc_deco(void)
             break;
 
            if( calc_nextdecodepth() )
-           {
+           { 
                 if( temp_depth_limit == 0 )
                     goto Surface;
 
@@ -1333,6 +1301,8 @@ Surface:
                     calc_ascenttime();
                     char_O_deco_status = 0;         // calc nullzeit next time.
                     char_O_deco_last_stop = 0;      // Surface reached (to animate menu)
+                    char_O_v_ceiling = 0;
+                    v_ceiling = 0;
                         return;
                 }
             }
