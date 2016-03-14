@@ -98,7 +98,7 @@
 //  + Allow to abort MD2 calculation (have to restart next time).
 //
 // Literature:
-// Bühlmann, Albert: Tauchmedizin; 4. Auflage [2002];
+// Bï¿½hlmann, Albert: Tauchmedizin; 4. Auflage [2002];
 // Schr"oder, Kai & Reith, Steffen; 2000; S"attigungsvorg"ange beim Tauchen, das Modell ZH-L16, Funktionsweise von Tauchcomputern; http://www.achim-und-kai.de/kai/tausim/saett_faq
 // Morrison, Stuart; 2000; DIY DECOMPRESSION; http://www.lizardland.co.uk/DIYDeco.html
 // Balthasar, Steffen; Dekompressionstheorie I: Neo Haldane Modelle; http://www.txfreak.de/dekompressionstheorie_1.pdf
@@ -198,10 +198,10 @@ static float			ppHe;
 static float			temp_tissue;
 static float			N2_ratio;       // Breathed gas nitrogen ratio.
 static float			He_ratio;       // Breathed gas helium ratio.
-static float 			var_N2_a;       // Bühlmann a, for current N2 tissue.
-static float 			var_N2_b;       // Bühlmann b, for current N2 tissue.
-static float 			var_He_a;       // Bühlmann a, for current He tissue.
-static float 			var_He_b;       // Bühlmann b, for current He tissue.
+static float 			var_N2_a;       // Bï¿½hlmann a, for current N2 tissue.
+static float 			var_N2_b;       // Bï¿½hlmann b, for current N2 tissue.
+static float 			var_He_a;       // Bï¿½hlmann a, for current He tissue.
+static float 			var_He_b;       // Bï¿½hlmann b, for current He tissue.
 static float  			var_N2_e;       // Exposition, for current N2 tissue.
 static float  			var_He_e;       // Exposition, for current He tissue.
 static float            var_N2_ht;      // Half-time for current N2 tissue.
@@ -632,10 +632,10 @@ deco_stop_found:
         // next stop is the last validated depth found, aka first_stop
         need_stop = 1;                  // Hit.
         temp_depth_limit = first_stop;  // Stop depth, in meter.
-        if(v_ceiling == 0){
+        if(v_ceiling == 0 && first_stop > 0){
           int_O_v_ceiling = (sim_lead_tissue_limit-pres_surface)*BAR_TO_METER*100;
           v_ceiling = 1;
-        } 
+        }
 
 
 done:
@@ -1004,10 +1004,10 @@ static void clear_tissue(void)
     p = N2_ratio * (pres_respiration -  ppWater);
     for(ci=0; ci<NUM_COMP; ci++)
     {
-        // cycle through the 16 Bühlmann N2 tissues
+        // cycle through the 16 Bï¿½hlmann N2 tissues
         pres_tissue_N2[ci] = p;
 
-        // cycle through the 16 Bühlmann tissues for Helium
+        // cycle through the 16 Bï¿½hlmann tissues for Helium
         pres_tissue_He[ci] = 0.0;
     }
 
@@ -1275,7 +1275,7 @@ void calc_hauptroutine_calc_deco(void)
             break;
 
            if( calc_nextdecodepth() )
-           { 
+           {
                 if( temp_depth_limit == 0 )
                     goto Surface;
 
@@ -1794,7 +1794,7 @@ static void calc_gradient_factor(void)
         // NOTE: in GF model, calc_lead_tissue_limit include already the
         //       correction due to gradient factor. To compute the actual
         //       current GF, we need to (re-)compute the raw ambiant-pressure
-        //       limit from the Bühlmann model.
+        //       limit from the Bï¿½hlmann model.
         if( char_I_deco_model != 0 )
         {
             ci = char_O_gtissue_no;
@@ -1857,7 +1857,7 @@ void deco_calc_desaturation_time(void)
     assert( 800 < int_I_pres_surface && int_I_pres_surface < 1100 );
     assert( 0 < char_I_desaturation_multiplier && char_I_desaturation_multiplier <= 100 );
 
-    N2_ratio = 0.7902; // FIXED sum as stated in bühlmann
+    N2_ratio = 0.7902; // FIXED sum as stated in bï¿½hlmann
     pres_surface = int_I_pres_surface * 0.001;
     ppN2 = N2_ratio * (pres_surface - ppWater);
     int_O_desaturation_time = 0;
@@ -2168,7 +2168,7 @@ void deco_calc_CNS_fraction(void)
         CNS_fraction += time_factor/(-222.11 * char_I_actual_ppO2 + 37350.0);
     //------------------------------------------------------------------------
     // Arieli et all.(2002): Modeling pulmonary and CNS O2 toxicity:
-    // J Appl Physiol 92: 248–256, 2002, doi:10.1152/japplphysiol.00434.2001
+    // J Appl Physiol 92: 248ï¿½256, 2002, doi:10.1152/japplphysiol.00434.2001
     // Formula (A1) based on value for 1.55 and c=20
     // example calculation: Sqrt((1.7/1.55)^20)*0.000404
     else if (char_I_actual_ppO2 < 172)
