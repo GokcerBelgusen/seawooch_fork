@@ -1067,6 +1067,7 @@ static void calc_hauptroutine(void)
         char_O_nullzeit = 0;        // Reset bottom time.
         char_O_deco_status = 0;     // Calc bottom-time/nullzeit next iteration.
         v_ceiling = 0;
+        int_O_v_ceiling = 0;
 
         // Values that should be reset just once for the full real dive.
         // This is used to record the lowest stop for the whole dive,
