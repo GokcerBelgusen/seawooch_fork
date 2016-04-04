@@ -1088,10 +1088,18 @@ change_ppo2_plus:
 	
     movlw   .10
     addwf   lo,F                ; increase ppO2
+#IFDEF CCR_CTRL
+	movlw	eCTRL_ADJ_MAX
+#ELSE
 	movlw	d'200'
+#ENDIF
 	cpfsgt	lo
 	bra		change_ppo2_plus2
+#IFDEF CCR_CTRL
+	movlw	eCTRL_ADJ_MIN
+#ELSE
 	movlw	d'30'
+#ENDIF
 	movwf	lo
 change_ppo2_plus2:
 	movff	lo,EEDATA			; write result

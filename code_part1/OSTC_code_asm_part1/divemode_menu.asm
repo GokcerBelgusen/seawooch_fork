@@ -1124,8 +1124,8 @@ timeout_divemenu2:					; quit divemode menu
 	btfss	dekostop_active
 	call	DISP_display_ndl_mask	;  Clear deco data, display nostop time
 
-    btfsc   decoplan_invalid        ; The decoplan needs to updated
-    bra     timeout_divemenu2a      ; Yes, skip update
+;    btfsc   decoplan_invalid        ; The decoplan needs to updated
+;    bra     timeout_divemenu2a      ; Yes, skip update
 
 	btfsc	dekostop_active
 	call	DISP_display_deko		; Update deco display at once

@@ -382,7 +382,7 @@
     TCODE    .132,  .0,      "beta"                      ;243 beta
     TCODE    .100,  .100,    "nouso"                     ;244 unuse
     TCODE    .20,   .65,     "Rein. CF,Gas y Deco"       ;245 Reset CF,Gas & Deco
-    TCODE    .58,   .145,    "Batt!"                     ;246 Batt!
+    TCODE    .50,   .145,    "Batt!"                     ;246 LowBatt!
     TCODE    .20,   .125,    "Simulador"                 ;247 Simulator
     TCODE    .30,   .2,      "Simulador OSTC"            ;248 OSTC Simulator
     TCODE    .20,   .65,     "Inicio Buc."               ;249 Start Dive

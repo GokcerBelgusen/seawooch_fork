@@ -434,9 +434,9 @@
     TCODE    .100,  .100,    "unuse"                     ;244 unuse
     TCODE    .20,   .65,     "Reset CF,Gas & Deco"       ;245 Reset CF,Gas & Deco
 #IFDEF CCR_CTRL
-    TCODE    .58,   .120,    "Batt!"                     ;246 Batt!
+    TCODE    .50,   .120,    "Batt!"                     ;246 Batt!
 #ELSE
-    TCODE    .58,   .145,    "Batt!"                     ;246 Batt!
+    TCODE    .50,   .145,    "Batt!"                     ;246 Batt!
 #ENDIF
     TCODE    .20,   .125,    "Simulator"                 ;247 Simulator
     TCODE    .30,   .2,      "OSTC Simulator"            ;248 OSTC Simulator
@@ -643,7 +643,7 @@
     TCODE    .20,   .35,     "Enable Bluetooth?"         ;392
 	TCODE    .100,  .125,    "More"                      ;393
 	TCODE    .65,   .23,     "Max."                      ;394 Max. (at top of screen)
-	TCODE    .100,  .0,      "SP4 +0.1"                  ;395
+	TCODE    .100,  .0,      "SP4 +"                     ;395
     TCODE    .20,   .155,    "Turn eCTRL OFF?"           ;396
 	TCODE    .100,  .100,    "Close"                     ;397
     TCODE    .20,   .35,     "Disable Bluetooth?"        ;398

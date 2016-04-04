@@ -2019,9 +2019,9 @@ set_powersafe:
     call    update_batt_get_percent_in_lo
 	movlw	d'20'					; 20%
 	cpfsgt	lo
-#IFDEF CCR_CTRL
     bra     set_powersafe1          ; Less - set low bat state
 
+#IFDEF CCR_CTRL
     btfss	ext_ppO2_valid
     bra     set_powersafe_02        ; No new data received - exit
 
@@ -2033,7 +2033,6 @@ set_powersafe_01:
 	bra		set_powersafe1
 set_powersafe_02:
 #ENDIF
-	bra		set_powersafe1
 	return
 
 set_powersafe1:

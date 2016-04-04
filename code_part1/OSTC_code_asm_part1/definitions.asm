@@ -27,9 +27,10 @@
   #DEFINE EE512                             ; Using I2C EEPROM 24LC512
   #DEFINE IMPERIAL                          ; Compilation with Imperial Units. By Vlad Karpinskiy <zlatkarp@gmail.com>
 
-;  #DEFINE CCR_CTRL                          ; CCR Controller support.
+  ;#DEFINE CCR_CTRL                          ; CCR Controller support.
   #IFDEF CCR_CTRL
-    #DEFINE CCR_CTRL_DBG_P                  ; TODO: !!!! DEBUG VERSION OF THE DIVE MODE MENU WITH P CORRECTION
+    #UNDEFINE IMPERIAL                      ; Disable IMPERIAL - NO ROM FOR IT
+;    #DEFINE CCR_CTRL_DBG_P                  ; DEBUG VERSION OF THE DIVE MODE MENU WITH P CORRECTION
   #ENDIF
 
 ;  #DEFINE RESTORE_SERIAL
@@ -50,11 +51,11 @@
 #ENDIF
 
 ; International extension. Selecting messages source:
-#DEFINE    ENGLISH                         ; Use english_text.asm
+;#DEFINE    ENGLISH                         ; Use english_text.asm
 ;#DEFINE	FRENCH  						; Use french_text.asm
 ;#DEFINE	GERMAN							; Use german_text.asm
 ;#DEFINE	SPANISH							; Use spanish_text.asm
-;#DEFINE	RUSSIAN							; Use russian_text.asm
+#DEFINE	RUSSIAN							; Use russian_text.asm
 ;#DEFINE	ITALIAN							; Use italian_text.asm
 
 ;#DEFINE	DISPLAY_TEST	; Enables Display-Test in RAW data menu
@@ -200,7 +201,7 @@ wait_temp       res 1           ; " + used to copy data to c code + used for tem
                                 ; never use wait_temp in interrupt routines (isr) and never call any wait routine in interrupts
 
 textnumber      res 1           ; for textdisplay
-textaddress     res 2				
+textaddress     res 2
 
 average_depth_hold  res 4       ; Holds Sum of depths (Resettable)
 average_depth_hold_total res 4  ; Holds Sum of depths (Non-Resettable)
@@ -213,7 +214,7 @@ flag1           res 1           ;Flag register 33
 flag2           res 1
 flag3           res 1
 flag4           res 1
-flag5           res 1           ; has to be exacly here, is modified by c-code (no sensor int) 
+flag5           res 1           ; has to be exacly here, is modified by c-code (no sensor int)
 flag6           res 1
 flag7           res 1
 flag8           res 1
@@ -263,7 +264,7 @@ sub_c           res 2
 sub_a           res 2
 sub_b           res 2
 
-dLSB            res 1           ;Pressure sensor interface 
+dLSB            res 1           ;Pressure sensor interface
 dMSB            res 1
 clock_count     res 1
 ppO2_setpoint_store res 1       ; Actual setpoint
@@ -343,7 +344,7 @@ eeprom_header_address   res 2
 
 batt_voltage            res 2   ; Battery voltage in mV
 
-i2c_temp                res 1   ; I²C timeout counter
+i2c_temp                res 1   ; Iï¿½C timeout counter
 i2c_temp2               res 1   ; 200
 
 sim_pressure            res 2   ; hold simulated pressure in mbar if in Simulator mode
@@ -373,7 +374,7 @@ customfunction_temp1    res 1   ; used in GETCUSTOM8 and GETCUSTOM15
 decoplan_page           res 1   ; used in DISP_MultiGF,...
 temp10                  res 2   ; used in customview
 
-fatal_error_code        res 1   ; holds error code value 
+fatal_error_code        res 1   ; holds error code value
 
 convert_value_temp      res 3   ; used in menu_battery_state_convert_date
 time_correction_value   res 1   ; Adds to Seconds on midnight
@@ -400,7 +401,7 @@ ASSERT_BANK1    MACRO   tag
         movlw   1
         xorwf   BSR,W
         bz      @end
-        
+
         movlw   low(tag)
         movff   WREG,temp10+0
         movlw   high(tag)
@@ -412,7 +413,7 @@ ASSERT_BANK1    MACRO   tag
 #IFDEF IMPERIAL
 temp11					res 1	; used for unit conversion
 #ENDIF
-#IFDEF SEAWOOCH	
+#IFDEF SEAWOOCH
 average_divesecs_timer    res 2       ; Used for resetable Timer display
 flag_s				res 1	; Flags for Seawooch implementation
 flag_s2				res 1	; Flags for Seawooch implementation
@@ -421,7 +422,7 @@ flag_s2				res 1	; Flags for Seawooch implementation
 ;=============================================================================
 ; C-code Routines
 ; PART 2
-    extern deco_calc_CNS_decrease_15min    
+    extern deco_calc_CNS_decrease_15min
     extern deco_calc_CNS_fraction
     extern deco_calc_desaturation_time
     extern deco_calc_hauptroutine
@@ -432,7 +433,7 @@ flag_s2				res 1	; Flags for Seawooch implementation
     extern deco_clear_CNS_fraction
     extern deco_calc_CNS_planning
     extern deco_clear_tissue
-    extern deco_hash    
+    extern deco_hash
     extern deco_pull_tissues_from_vault
     extern deco_push_tissues_to_vault
     extern deco_gas_volumes
@@ -470,7 +471,7 @@ flag_s2				res 1	; Flags for Seawooch implementation
 #DEFINE	DISPLAY_e_nwr			PORTE,2 ;0
 
 ; Bank0 flags
-#DEFINE win_flip_screen     win_flags,0 ; 180° rotation of the DISPLAY screen.
+#DEFINE win_flip_screen     win_flags,0 ; 180ï¿½ rotation of the DISPLAY screen.
 #DEFINE win_display_type    win_flags,1 ; =1: Display1, =0: Display0
 
 ; Flags
@@ -496,7 +497,7 @@ flag_s2				res 1	; Flags for Seawooch implementation
 #DEFINE	menubit3			flag3,1	; menu
 #DEFINE	set_minutes			flag3,2	; set minutes (not hours)
 #DEFINE internal_eeprom_write3 flag3,3 ;=1: start routine to access internal EEPROM BANK 2 via the UART
-#DEFINE	menubit4			flag3,4	; quit set time 
+#DEFINE	menubit4			flag3,4	; quit set time
 #DEFINE	display_velocity	flag3,5	; velocity is displayed
 #DEFINE	temp_changed		flag3,6	; temperature changed
 #DEFINE	pres_changed		flag3,7	; pressure changed
@@ -560,7 +561,7 @@ flag_s2				res 1	; Flags for Seawooch implementation
 
 #DEFINE	last_ceiling_gf_shown	flag10,0	;=1: Last stop already shown
 #DEFINE	uart_send_int_eeprom	flag10,1	;=1: Send internal EEPROM BANK 0
-#DEFINE	uart_reset_decodata		flag10,2	;=1: Reset deco data 
+#DEFINE	uart_reset_decodata		flag10,2	;=1: Reset deco data
 #DEFINE	manual_gas_changed		flag10,3	;=1: Manual Gas changed during dive
 #DEFINE	stored_gas_changed		flag10,4	;=1: Stored Gas changed during dive
 #DEFINE	event_occured			flag10,5	;=1: An Event has occured during the current sample interval
@@ -589,7 +590,7 @@ flag_s2				res 1	; Flags for Seawooch implementation
 #DEFINE	button_delay_done		flag13,1	;=1: Button was pressed for more then 500ms, start counting
 #DEFINE	display_set_active		flag13,2	;=1: De/Activate gases underwater menu is visible
 #DEFINE	deco_mode_changed		flag13,3	;=1: The Decomode was changes, show decomode description!
-#DEFINE	DISP_velocity_display	flag13,4	;=1: Velocity is displayed 
+#DEFINE	DISP_velocity_display	flag13,4	;=1: Velocity is displayed
 #IFNDEF IMPERIAL
 	#DEFINE depth_greater_100m		flag13,5	;=1: Depth is greater then 100m
 #ELSE
@@ -764,7 +765,7 @@ eCTRL_fsr2l_out_tmp res 1	; Temporary for Index register storage for OUT
 
 #DEFINE eCTRL_BAT_LOW       d'170'          ; Battery threshold value 3.7V (170+200)/100
 #DEFINE eCTRL_BAT_OK_LOW    d'180'          ; Battery threshold value 3.8V (180+200)/100
-#DEFINE eCTRL_ADJ_MIN       d'080'          ; Minimal adjustable ppO2
+#DEFINE eCTRL_ADJ_MIN       d'040'          ; Minimal adjustable ppO2
 #DEFINE eCTRL_ADJ_MAX       d'160'          ; Maximal adjustable ppO2
 
 #ENDIF

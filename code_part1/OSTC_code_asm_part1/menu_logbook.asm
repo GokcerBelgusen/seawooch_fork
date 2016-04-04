@@ -866,7 +866,7 @@ profile_display_skip_temp:
     ;---- Draw Marker square , if any ----------------------------------------
     btfss       log_marker_found            ; Any marker to draw?
     bra         profile_display_skip_marker ; No
- 
+
     ; 2x2 square
     incf        apnoe_mins,W
     movff       WREG,win_top
@@ -883,7 +883,6 @@ profile_display_skip_temp:
     bcf         log_marker_found            ; Clear flag
 
 profile_display_skip_marker:
-
     ;---- Draw CNS curve, if any ---------------------------------------------
     movf        divisor_cns,W
     bz          profile_display_skip_cns

@@ -400,7 +400,7 @@
     TCODE    .132,  .0,      "beta"                      ;243 beta
     TCODE    .100,  .100,    "unuse"                     ;244 unuse
     TCODE    .20,   .65,     "Сброс ДП,газ и деко"       ;245 Reset CF,Gas & Deco
-    TCODE    .58,   .145,    "Батарея!"                  ;246 LowBatt!
+    TCODE    .50,   .145,    "Батарея!"                  ;246 LowBatt!
     TCODE    .20,   .125,    "Планировщик"               ;247 Simulator
     TCODE    .30,   .2,      "OSTC Планировщик"          ;248 OSTC Simulator
     TCODE    .20,   .65,     "Начать имитацию"           ;249 Start Dive

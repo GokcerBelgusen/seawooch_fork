@@ -420,9 +420,25 @@ DISP_clear_decoarea:
 DISP_display_ndl_mask:
 #IFDEF SEAWOOCH
     call    DISP_clear_GF
+#ELSE
+	; Clears Gradient Factor
+	movlw	d'8'
+	movwf	temp1
+	WIN_TOP		.145
+	WIN_LEFT	.0
+	call	DISP_display_clear_common_y1
+#ENDIF
 	btfsc	menubit					; Divemode menu active?
 	return							; Yes, return
 
+	; Clear Dekostop and Dekosum
+	rcall	DISP_clear_decoarea	
+	call	DISP_divemask_color	; Set Color for Divemode mask
+	DISPLAYTEXT		d'84'			; NoStop
+	call	DISP_standard_color
+	return
+
+#IFDEF SEAWOOCH
 DISP_clear_GF:
 	; Clears Gradient Factor
 	movlw	d'8'
@@ -435,28 +451,7 @@ DISP_clear_GF:
 	WIN_LEFT	.0
 	call	DISP_display_clear_common_y1
 	return							; Yes, return
-#ELSE
-	; Clears Gradient Factor
-	movlw	d'8'
-	movwf	temp1
-#IFDEF CCR_CTRL
-	WIN_TOP		.119
-#ELSE
-	WIN_TOP		.145
 #ENDIF
-	WIN_LEFT	.0
-	call	DISP_display_clear_common_y1
-
-	btfsc	menubit					; Divemode menu active?
-	return							; Yes, return
-#ENDIF
-
-	; Clear Dekostop and Dekosum
-	rcall	DISP_clear_decoarea	
-	call	DISP_divemask_color	; Set Color for Divemode mask
-	DISPLAYTEXT		d'84'			; NoStop
-	call	DISP_standard_color
-	return
 
 DISP_display_ndl:
 	GETCUSTOM8	d'66'				; Always show GF?
