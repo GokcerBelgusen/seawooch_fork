@@ -47,15 +47,15 @@
 #IFDEF CCR_CTRL
  #DEFINE	max_custom_number	d'81'		; Number of last used custom function
 #ELSE
- #DEFINE	max_custom_number	d'73'		; Number of last used custom function
+ #DEFINE	max_custom_number	d'74'		; Number of last used custom function
 #ENDIF
 
 ; International extension. Selecting messages source:
-;#DEFINE    ENGLISH                         ; Use english_text.asm
+#DEFINE    ENGLISH                         ; Use english_text.asm
 ;#DEFINE	FRENCH  						; Use french_text.asm
 ;#DEFINE	GERMAN							; Use german_text.asm
 ;#DEFINE	SPANISH							; Use spanish_text.asm
-#DEFINE	RUSSIAN							; Use russian_text.asm
+;#DEFINE	RUSSIAN							; Use russian_text.asm
 ;#DEFINE	ITALIAN							; Use italian_text.asm
 
 ;#DEFINE	DISPLAY_TEST	; Enables Display-Test in RAW data menu

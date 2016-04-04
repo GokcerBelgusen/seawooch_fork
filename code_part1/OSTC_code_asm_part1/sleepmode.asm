@@ -121,8 +121,11 @@ onesec_sleep:
 	btfss	nofly_active
 	bra		onesec_sleep_nonofly
 	
-	bsf		LED_blue				; Set nofly LED
-	
+	GETCUSTOM8	d'75'				; Blue LED Enabled?
+	tstfsz	WREG					; =0?
+	bsf		LED_blue  				; Yes: Blink LED
+
+
 	nop
 	sleep
 	nop

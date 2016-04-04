@@ -226,7 +226,7 @@ cf_default_table2:
 	CF_DEFAULT    CF_INT15,     d'180', d'0',   d'600'  ; CF80 eCTRL Scrubber Life in Minutes
 	CF_DEFAULT    CF_BOOL,      d'0',   d'0',   d'0'    ; CF81 eCTRL HUD Signalling type
 #ELSE
-	CF_DEFAULT    CF_INT8,      d'0',   d'0',   d'0'    ; CF75 unused
+	CF_DEFAULT    CF_BOOL,      d'1',   d'0',   d'0'    ; CF75 Blue led turned on?
 	CF_DEFAULT    CF_INT8,      d'0',   d'0',   d'0'    ; CF76 unused
 	CF_DEFAULT    CF_INT8,      d'0',   d'0',   d'0'    ; CF77 unused
 	CF_DEFAULT    CF_INT8,      d'0',   d'0',   d'0'    ; CF78 unused

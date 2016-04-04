@@ -379,7 +379,7 @@
     TCODE    .40,   .35,     "Scrub. Life [m]"           ;209 unused
     TCODE    .40,   .35,     "HUD Signalling "           ;210 unused
 #ELSE
-    TCODE    .40,   .35,     "unused         "           ;204 unused
+    TCODE    .40,   .35,     "BlueLED  Enable"           ;204 unused
     TCODE    .40,   .35,     "unused         "           ;205 unused
     TCODE    .40,   .35,     "unused         "           ;206 unused
     TCODE    .40,   .35,     "unused         "           ;207 unused

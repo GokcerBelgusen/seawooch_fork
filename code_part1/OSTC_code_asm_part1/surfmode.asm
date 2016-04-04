@@ -296,8 +296,15 @@ update_surfloop60_2:
 
 set_leds_surfmode:	
 	btfsc	nofly_active
-	btg		LED_blue
+	bra     blink_blue_led
+	
 	return	
+
+blink_blue_led:
+	GETCUSTOM8	d'75'				; Blue LED Enabled?
+	tstfsz	WREG					; =0?
+	btg		LED_blue  				; Yes: Blink LED
+	return
 
 ;=============================================================================
 
